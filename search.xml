@@ -18,6 +18,14 @@
       </categories>
       
       
+        <tags>
+            
+            <tag> 后端开发 </tag>
+            
+            <tag> 开发手册 </tag>
+            
+        </tags>
+      
     </entry>
     
     
@@ -41,7 +49,11 @@
       
         <tags>
             
-            <tag> Redis </tag>
+            <tag> 后端开发 </tag>
+            
+            <tag> 数据库 </tag>
+            
+            <tag> redis </tag>
             
         </tags>
       
@@ -64,6 +76,8 @@
           <category> 消息队列 </category>
           
           <category> 后端开发 </category>
+          
+          <category> 中间件 </category>
           
       </categories>
       
@@ -99,7 +113,13 @@
       
         <tags>
             
+            <tag> 后端开发 </tag>
+            
             <tag> 源码分析 </tag>
+            
+            <tag> SpringBoot </tag>
+            
+            <tag> Java </tag>
             
         </tags>
       
@@ -153,6 +173,10 @@
       
         <tags>
             
+            <tag> 后端开发 </tag>
+            
+            <tag> Java </tag>
+            
             <tag> SpringCloud </tag>
             
         </tags>
@@ -182,7 +206,13 @@
       
         <tags>
             
-            <tag> spring </tag>
+            <tag> 后端开发 </tag>
+            
+            <tag> 源码分析 </tag>
+            
+            <tag> Java </tag>
+            
+            <tag> Spring </tag>
             
         </tags>
       
@@ -236,7 +266,11 @@
       
         <tags>
             
-            <tag> Spring-boot </tag>
+            <tag> 后端开发 </tag>
+            
+            <tag> SpringBoot </tag>
+            
+            <tag> Java </tag>
             
         </tags>
       
@@ -265,7 +299,11 @@
       
         <tags>
             
-            <tag> SpringMVC </tag>
+            <tag> 后端开发 </tag>
+            
+            <tag> Java </tag>
+            
+            <tag> SpringMvc </tag>
             
         </tags>
       
@@ -294,7 +332,11 @@
       
         <tags>
             
-            <tag> Spring-boot </tag>
+            <tag> SpringBoot </tag>
+            
+            <tag> Java </tag>
+            
+            <tag> 接口测试 </tag>
             
         </tags>
       
@@ -322,6 +364,10 @@
       
       
         <tags>
+            
+            <tag> 后端开发 </tag>
+            
+            <tag> Java </tag>
             
             <tag> Spring </tag>
             
@@ -354,7 +400,11 @@
       
         <tags>
             
-            <tag> Spring-boot </tag>
+            <tag> SpringBoot </tag>
+            
+            <tag> Java </tag>
+            
+            <tag> MybatisPlus </tag>
             
         </tags>
       
