@@ -1,0 +1,551 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>Duckkkkk·博客 | Duckkkkk·博客</title><meta name="keywords" content="Duckkkkk;鸭鸭Duck"><meta name="author" content="Duckkkkk"><meta name="copyright" content="Duckkkkk"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="Duckkkkk·博客"><meta name="application-name" content="Duckkkkk·博客"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="Duckkkkk·博客"><meta property="og:url" content="https://github.com/ChestnutDuck/StudyRepository.github.io.git/posts/0.html"><meta property="og:site_name" content="Duckkkkk·博客"><meta property="og:description" content="Bean的生命周期 实例化 Bean：Bean 容器根据配置文件中的 Bean 定义，通过反射机制创建 Bean 的实例。  设置属性和依赖：为 Bean 设置相关的属性和依赖项。  初始化 Bean：  检查是否实现了相关的 Aware 接口，并设置相应的依赖。 检查bean是否实现了 BeanP"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://github.com/ChestnutDuck/StudyRepository.github.io.git/img/touxiang.jpg"><meta property="article:author" content="Duckkkkk"><meta property="article:tag" content="Duckkkkk;鸭鸭Duck"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://github.com/ChestnutDuck/StudyRepository.github.io.git/img/touxiang.jpg"><meta name="description" content="Bean的生命周期 实例化 Bean：Bean 容器根据配置文件中的 Bean 定义，通过反射机制创建 Bean 的实例。  设置属性和依赖：为 Bean 设置相关的属性和依赖项。  初始化 Bean：  检查是否实现了相关的 Aware 接口，并设置相应的依赖。 检查bean是否实现了 BeanP"><link rel="shortcut icon" href="/ChestnutDuck/StudyRepository.github.io.git/img/siteicon/64.png"><link rel="canonical" href="https://github.com/ChestnutDuck/StudyRepository.github.io.git/posts/0"><link rel="preconnect" href="//cdn.cbd.int"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="baidu-site-verification" content="codeva-vcKVtmLEJf"/><meta name="baidu-site-verification" content="code-xxx"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="/ChestnutDuck/StudyRepository.github.io.git/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.20/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: undefined,
+  postHeadAiDescription: {"enable":true,"gptName":"Duckkkkk","mode":"local","switchBtn":false,"btnLink":"https://afdian.net/item/886a79d4db6711eda42a52540025c377","randomNum":3,"basicWordCount":1000,"key":"xxxx","Referer":"https://xx.xx/"},
+  diytitle: {"enable":true,"leaveTitle":"不要走！再看看嘛！","backTitle":"欢迎回来！"},
+  LA51: undefined,
+  greetingBox: undefined,
+  twikooEnvId: '',
+  commentBarrageConfig:undefined,
+  root: '/ChestnutDuck/StudyRepository.github.io.git/',
+  preloader: {"source":3},
+  friends_vue_info: undefined,
+  navMusic: false,
+  mainTone: undefined,
+  authorStatus: {"skills":null},
+  algolia: undefined,
+  localSearch: {"path":"/ChestnutDuck/StudyRepository.github.io.git/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: {"limitDay":365,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":true,"limitCount":50,"languages":{"author":"作者: Duckkkkk","link":"链接: ","source":"来源: Duckkkkk·博客","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#425AEF","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: 'Duckkkkk·博客',
+  title: 'Duckkkkk·博客',
+  postAI: '',
+  pageFillDescription: 'Bean的生命周期, SpringBoot的启动流程, 什么是SpringBoot, Spring Boot 的核心特性可以概括为以下几点, Spring Boot 支持多种内嵌服务器, Spring Boot 中 application.properties 和 application.yml 的区别是什么？, Spring Boot 配置文件的加载顺序, Spring Boot 打成的 jar和普通的 jar 有什么区别, 如何理解Spring Boot中的starter, SpringBoot如何处理跨域请求, SpringBoot拦截器是什 么？有没有在程序中使用过, SpringBoot 中如何实现定时任务 ?, 对 Spring Boot 事件机制的了解, Spring Boot 中如何实现异步处理？, {} 和 ${} 的区别是什么, MyBatis 是如何进行分页的？分页插件的原理是什么, 简述 MyBatis 的插件运行原理以及如何编写一个插件, MyBatis 动态 sql 是做什么的？都有哪些动态 sql？能简述一下动态 sql 的执行原理不？, MyBatis 执行批量插入能返回数据库主键列表吗？, MyBatis 是如何将 sql 执行结果封装为目标对象并返回的, MyBatis 能执行一对一、一对多的关联查询吗？都有哪些实现方式以及它们之间的区别, join 查询出来 100 条记录如何确定主对象是 5 个而不是 100 个？, MyBatis延迟加载的实现原理是什么？, MyBatis 的 xml 映射文件中不同的 xml 映射文件id 是否可以重复？, MyBatis 中如何执行批处理, MyBatis 都有哪些 Executor 执行器？它们之间的区别是什么, MyBatis 中如何指定使用哪一种 Executor 执行器？, MyBatis 映射文件中如果 A 标签通过 include 引用了 B 标签的内容请问B 标签能否定义在 A 标签的后面还是说必须定义在 A 标签的前面？, 为什么说 MyBatis 是半自动 ORM 映射工具？它与全自动的区别在哪里？, 什么是SpringBoot的自动装配, SpringBoot自动装配的原理, Spring的事务在什么时候会失效, Mybatis的一级缓存和二级缓存, mybatis的运行原理, sql 语句where和having的区别, ON和WHERE 的区别, sql语句的连接有哪些有什么区别, 如何创建唯一索引, 项目, 在项目开发过程中你有遇到过哪些运行时异常怎么排查解决的, 看到你的项目用到了 DDD这也是我们很感兴趣的技术点你可以介绍下你在使用 DDD 做这个项目时都运用了 DDD 哪些知识。, 你的抽奖流程中哪些被定义为值对象哪些被定义为实体对象, 关于访问数据层的依赖倒置是怎么使用的有什么好处你可以描述下吗, 把抽奖划分为抽奖前、中、后三个动作。请具体结合场景讲解下为什么这样设计, 是什么场景下使用了责任链模式什么场景使用组合模式为什么？, 抽奖也是一种瞬时峰值很高的业务场景那么对于抽中奖品后的库存扣减是怎么做的？, 那么最终同步库是怎么做的怎么降低对数据库的压力的？, 项目中你提到了可以支持不同场景的抽奖诉求比如；多少积分后可以抽奖一个固定范围的奖品或者抽奖n次后才可以中奖某个奖品。这部分你是怎么做的？库表怎么设计的？, 18. 抽奖奖品库存如何处理怎么保证最终一致性？, . 生产者可能多次发送同一个MQ怎么保证奖品不会超发？, 抽奖算法如何提供O(1)时间复杂度提高抽奖效率？, 在项目中使用rabbitmq 消费者在拿到消息的同时 系统宕机了怎么办, 为什么自研路由组件, 4. 秒杀的滑块锁讲解的生命周期实例化容器根据配置文件中的定义通过反射机制创建的实例设置属性和依赖为设置相关的属性和依赖项初始化检查是否实现了相关的接口并设置相应的依赖检查是否实现了接口进行前置处理如果实现了接口调用其方法如果在配置文件中定义了则执行相应的方法如果需要在初始化后执行操作可以实现接口进行后置处理被容器管理并在程序中使用销毁如果实现了接口则调用方法销毁没有实现接口就检查配置文件是否指定指定就调用对应的销毁方法销毁如果两个都没实现将不会执行任何销毁操作导致的资源不会被自动释放会出现或资源占用的问题的启动流程启动方法从方法启动并通过会初始化一个对象运行的过程中会创建应用的监听器并开始监听启动过程中发生的事件会创建和配置一个用来加载系统变量环境变量配置文件等确定应用环境然后根据应用类型选择合适的并将环境变量监听器与应用上下文关联起来会扫描项目中定义的所有并将它们注册到容器中自动配置和手动配置的也会在此时加载如果是应用会启动嵌入式服务器如或并初始化相关组件所有初始化和配置完成后会显示启动成功的日志整个应用正式进入运行状态什么是是简化应用程序开发的框架它的主要目标是减少应用程序的配置和开发复杂性使我们快速构建测试和部署应用的核心特性可以概括为以下几点自动配置会根据项目中添加的依赖自动配置应用的常用组件避免了手动配置简化了开发流程依赖提供了一组依赖开发者只需引入这些依赖就能快速集成相关功能无需繁琐的依赖管理内嵌服务器支持内嵌的服务器如可以直接将应用打包成一个可执行的文件启动时无需外部应用服务器无配置倾向于使用注解和配置类进行配置减少了传统中复杂的配置文件简化的开发和部署应用可以通过单个命令如运行简化了应用的开发和部署过程适合快速迭代支持多种内嵌服务器默认的内嵌服务器适合大多数应用开发支持和一个轻量级的服务器适合需要高性能和可嵌入性应用的场景特别是微服务架构中一个灵活的轻量级的服务器支持异步处理适用于高性能应用和微服务一个非阻塞的异步事件驱动网络应用框架通常用于高性能的网络应用开发中和的区别是什么对于配置而言效果是一样的区别就是书写格式使用键值对配置键和值之间用等号或冒号分隔使用格式具有层次结构使用缩进表示嵌套关系适合复杂配置阅读性更好配置文件的加载顺序优先级最高的是命令行参数通过启动时传入的命令行参数包外的包内的包外的包内的注意如果两个文件同时存在优先级会高一些相同名称的配置会将内的配置覆盖掉当我们使用连接配置中心的配置信息因为是在应用上下文刷新之前就会被加载所以的优先级要高于后加载的不会覆盖相同的配置信息打成的和普通的有什么区别项目最终打包成的包含了内嵌的服务器和指定的启动类这种可以直接通过命令来运行目录结构不同无法作为依赖使用使用插件进行打包生成的结构与普通不同应用代码位于依赖库位于中而普通文件通常将所有类和资源文件直接放在根目录下因此的包含的依赖管理和目录结构使它无法被其他项目直接依赖使用如何理解中的在中是一组有用的依赖集合用于简化构建配置通过提供了各种常用功能模块的集成我们只需引入一个依赖便可以获得该模块的所有相关依赖和配置无需手动添加多个依赖库和配置文件如何处理跨域请求什么是跨域请求跨域请求问题是指在应用中当一个网页试图从不同的源域名协议或端口请求资源时浏览器会出于安全原因限制这些请求这种机制被称为同源策略它是浏览器的安全特性用于防止恶意网站获取用户数据使用注解在控制器方法或类上添加注解以允许特定的跨域请求这种方法适合需要灵活配置跨域的场景可以针对不同的请求源进行控制可以在的配置类中全局配置跨域资源共享这样应用中的所有控制器都能使用相同的跨域策略通过实现接口并重写方法来解决跨域问题这种方法适合于应用中需要统一管理跨域请求的场景拦截器是什么有没有在程序中使用过拦截器是一种用于处理请求和响应的组件它可以在请求到达控制器之前或在响应返回之前进行处理允许开发者添加一些自定义的逻辑中拦截器通常通过实现接口并重写其中的方法来实现自定义的拦截逻辑为了使拦截器生效需要在配置类中通过实现接口重写方法来注册拦截器添加拦截配置中如何实现定时任务实现定时任务可以使用注解通过该注解可以很方便地定义方法在指定的时间间隔或特定的时间点执行步骤在启动类上添加注解启用的定时任务支持在需要的方法上面添加注解来指定任务的执行规则可以使用表达式来控制任务的执行时间第一个是每小时的第几分钟第二个是小时月的天数年的月数星期对事件机制的了解的事件机制通过发布订阅模式主要应用于应用程序中各个组件之间进行消息传递和解耦通过事件发布和监听机制实现了不同组件之间的松耦合事件机制的主要组成部分自定义一个事件类继承事件发布者是发布事件的组件可以通过接口来发布事件事件监听器是处理特定事件的组件可以通过注解或实现接口来定义监听器支持同步和异步事件传播通过在事件监听器方法上添加注解可以实现异步处理提升性能中如何实现异步处理注解指定某个方法在另一个线程中异步执行在启动类上添加注解来启用异步处理注解标记希望异步执行的方法要注意异步方法是公共的且不能在同一个类中调用异步方法出现异常可以在内部处理捕获如果你希望在调用者处检查异步方法的结果和异常可以让异步方法返回或这样你可以在调用处使用方法来获取结果或捕获异常和的区别是什么参数占位符会将中的内容转换为的占位符然后在执行前使用的按顺序给的号占位符设置参数值会自动处理传入参数的数据类型转换并且这种方式可以防止注入是文件中的变量占位符通常用于动态生成的场景在中它会直接将占位符替换为传入的文本内容但是这种替换没有类型安全不会对插入的内容进行预处理是如何进行分页的分页插件的原理是什么使用对象进行逻辑分页但这种方式会查询所有数据再截取所需的数据所以不适合大数据量的场景在中直接编写数据库的分页语法如和来实现分页使用插件来完成物理分页可以自动处理分页参数并生成分页分页插件的基本原理是使用提供的插件接口实现自定义插件在插件的拦截方法内拦截待执行的然后重写根据方言添加对应的物理分页语句和物理分页参数简述的插件运行原理以及如何编写一个插件使用的动态代理为需要拦截的接口生成代理对象来实现接口方法拦截功能仅可以编写针对这种接口的插件每当执行这种接口对象的方法时就会进入拦截方法具体就是的方法也可以通过和注解来指定要拦截的接口和方法如何编写插件创建一个插件类实现的接口并重写方法使用和注解来指定要拦截的接口和方法在的配置文件如或的配置类中注册插件动态是做什么的都有哪些动态能简述一下动态的执行原理不动态可以让我们在映射文件内以标签的形式编写动态完成逻辑判断和动态拼接的功能在启动时解析配置文件将模板和动态标签转换为一个内部的节点树结构每个动态标签都对应一个节点使用表达式从传入的参数对象中动态获取属性的值用于判断条件是否满足当条件为真时会将对应的片段加入最终的语句中将生成的语句与参数绑定后传递给数据库执行完成查询或更新操作执行批量插入能返回数据库主键列表吗在配置文件的标签中设置会在执行插入操作时自动获取数据库生成的主键并将其设置到插入对象的主键属性上可以通过指明实体类中的主键字段是如何将执行结果封装为目标对象并返回的使用标签逐一定义列名和对象属性名之间的映射关系有了列名与属性名的映射关系后通过反射创建对象同时使用反射给对象的属性逐一赋值并返回能执行一对一一对多的关联查询吗都有哪些实现方式以及它们之间的区别支持一对一一对多多对一以及多对多的关联查询使用和标签来区分不同的关联关系一对一和多对一使用标签映射单个关联对象一对多和多对多使用标签映射集合类型的关联对象关联对象查询有两种实现方式多次查询即延迟加载首先加载主对象随后根据主对象的属性再分别查询其关联对象这种方式适用于需要懒加载的场景嵌套查询通过一次查询使用将主对象和关联对象的数据一起查询出来适用于一次性获取所有关联数据的场景查询出来条记录如何确定主对象是个而不是个的去重机制通过中的标签来实现会根据标签指定的列值判断和合并重复的主对象实例将关联对象加入到主对象的集合中延迟加载的实现原理是什么在中可以通过配置来启用延迟加载机制使用或动态代理创建关联对象的代理对象当调用关联属性的方法时就会进入代理的拦截器逻辑例如当执行时拦截器会检查是否已加载如果为则拦截器会执行事先保存的查询来获取关联对象然后调用将查询结果赋值给的属性最后完成的调用这就是延迟加载的基本原理的映射文件中不同的映射文件是否可以重复不同的映射文件如果配置了那么可以重复如果没有配置那么不能重复原因就是是作为的使用的如果没有就剩下那么重复会导致数据互相覆盖中如何执行批处理批处理允许在一个数据库连接上累积多条操作减少数据库交互次数通过提供的模式来执行批处理都有哪些执行器它们之间的区别是什么有三种基本的执行器每执行一次或就开启一个对象用完立刻关闭对象执行或以作为查找对象存在就使用不存在就创建用完后不关闭对象而是放置于内供下一次使用简言之就是重复使用对象是用于批处理的执行器调用执行操作时会将每个通过添加到批处理队列中而不会立即执行这些操作会被缓存在不同的对象中每个不同的操作或表对应一个独立的会缓存这些对象以便在执行批处理时可以一次性地执行它们的批量操作在或调用时将所有一次性发送到数据库执行中如何指定使用哪一种执行器在全局配置文件中通过标签的属性来指定的类型使用来动态指定类型映射文件中如果标签通过引用了标签的内容请问标签能否定义在标签的后面还是说必须定义在标签的前面虽然解析映射文件是按照顺序解析的但是被引用的标签依然可以定义在任何地方都可以正确识别原理是解析标签发现标签引用了标签但是标签尚未解析到此时会将标签标记为未解析状态然后继续解析剩下的标签待所有标签解析完毕会重新解析那些被标记为未解析的标签此时再解析标签时标签已经存在标签也就可以正常解析完成了为什么说是半自动映射工具它与全自动的区别在哪里而在查询关联对象或关联集合对象时需要手动编写来完成所以称之为半自动映射工具属于全自动映射工具使用查询关联对象或者关联集合对象时可以根据对象关系模型直接获取所以它是全自动的什么是的自动装配定义了一套接口规范这套规范规定在启动时会扫描外部引用包中的文件将文件中配置的类型信息加载到容器并执行类中定义的各种操作如果我们需要引入第三方依赖只需引入依赖通过少量注解和一些简单的配置就能使用第三方组件提供的功能了自动装配的原理的自动装配是通过注解启动的它利用引入该类最终调用方法从文件中读取要加载的自动配置类这些配置类会被加载到容器中供后续的条件筛选使用接下来通过注解判断是否应该创建或注入特定的然后会筛选出自动配置类中符合条件的定义并在需要时实例化并注入到容器中实现按需装配避免不必要的加载的事务在什么时候会失效在方法上定义了错误的访问权限就会导致事务失效因为要求被代理方法必须是的方法用或修饰无法通过动态代理变成事务方法这样也会导致事务失效在某个类的某个方法中调用另外一个事务方法一个类没有交给管理方法也不会生成事务在多线程中用事务可能会导致两个方法不在同一个线程中获取到的数据库连接不一样形成了两个不同的事务的一级缓存和二级缓存一级缓冲一级缓存是级别的缓存作用范围在同一个中当我们在相同的中使用相同的参数和语句查询时会优先从缓存中取数据而不再发送到数据库一级缓存默认开启在执行增删改手动清空或关闭后一级缓存会失效二级缓存二级缓存存储的是整个范围内的查询结果在同一个下创建的之间的数据可以共享二级缓存默认关闭需要通过在全局配置中启用或在文件中使用标签启用如果同一中执行了增删改操作二级缓存也会自动清空以确保数据一致性一个它代表了与数据库的一次会话用于管理的执行的运行原理首先会加载全局配置文件和文件解析并加载数据库配置信息环境信息映射关系等然后会根据配置创建一个对象然后通过创建对象有了对象我们可以执行方法或直接执行语句如果在的配置文件中配置了动态首先解析动态生成最终的语句并且会通过绑定参数然后通过的执行器查询缓存并执行在执行完成并获取到数据库结果集后会通过将结果集映射为相应的实体对象如果使用了事务提供和方法来提交或回滚事务在使用完后调用方法关闭释放资源语句和的区别过滤指定的行不能在字句中使用聚合函数分组函数在前过滤已经分组后的结果一般都是和连用不能单独使用在之后因为是基于每一行的条件来筛选数据的它的作用范围仅限于每个单独的行聚合函数是对多行数据进行汇总计算计算出的是整租数据而不是单独的行和的区别连接表时会根据连接条件生成一张新的临时表就是连接条件它决定临时表的生成是在临时表生成以后再对临时表中的数据进行过滤生成最终的结果集语句的连接有哪些有什么区别连接类型说明内连接默认连接方式只有当两个表都存在满足条件的记录时才会返回行左外连接返回左表中的所有行即使右表中没有满足条件的行也是如此右外连接返回右表中的所有行即使左表中没有满足条件的行也是如此全外连接只要其中有一个表存在满足条件的记录就返回行将一个表连接到自身就像该表是两个表一样为了区分两个表在语句中需要至少重命名一个表交叉连接从两个或者多个连接表中返回记录集的笛卡尔积如何创建唯一索引列添加索引项目在项目开发过程中你有遇到过哪些运行时异常怎么排查解决的参数错误异常其他一些更多是功能流程实现细节上如项目中的规则树节点判断流程问题抛出一些自定义的异常看到你的项目用到了这也是我们很感兴趣的技术点你可以介绍下你在使用做这个项目时都运用了哪些知识是一种软件设计方法他的很多规范约定都是为了提高工程交付质量它所有的手段都是希望以一个功能逻辑的实现为聚合将功能所需的对象接口逻辑按照领域划分到自己的领域内就像在这个项目中抽奖中的策略就是一个独立的领域模型在这个领域中需要提供策略的装载随机数算法计算抽奖模板调用功能这样一个领域就像划分好的一个独立个体它拥有属于它的对象信息当需要使用数据库资源缓存资源以及外部接口资源的时候都通过依赖倒置进行调用这个领域不做其他模块的引入只负责业务功能实现所需的所有数据则有外部接口通过依赖倒置提供上层模块不应该依赖底层模块它们都应该依赖于抽象抽象不应该依赖于细节细节应该依赖于抽象你的抽奖流程中哪些被定义为值对象哪些被定义为实体对象在的规范定义中值对象通常用于描述对象属性的值不具备唯一不影响数据变化如数据库中字段的枚举值业务流程中属性对象如抽奖流程中规则树值对象实体对象则具备唯一会影响到写库动作抽奖发起实体奖品信息实体对象关于访问数据层的依赖倒置是怎么使用的有什么好处你可以描述下吗的分层结构是以领域实现为核心一个领域下所需的外部服务都由领域层定义接口让基础层做具体实现而数据库持久化操作定义的对象就被这样的方式被限定在基础层了外部是没法引入使用的防止了数据库持久化对象进入业务中把抽奖划分为抽奖前中后三个动作请具体结合场景讲解下为什么这样设计这个的设计得益于在框架源码的学习在源码中经常会出现对一个流程进行拆分解耦如是对象的拆解是会话流程的拆解所以在设计大营销的抽奖模块时对于需求中的各类功能点黑名单抽奖权重抽奖默认抽奖抽奖次解锁兜底抽奖等等情况是可以拆解为抽奖前中后个行为动作的基于这样的考虑后设计出非常容易扩展的松耦合结构是什么场景下使用了责任链模式什么场景使用组合模式为什么模板模式定义了一套标准的抽奖流程比如进行参数校验执行责任链通过规则树进行一个抽奖最终返回抽奖结果这样的话整个抽奖流程就会很清晰方便后续的功能迭代在设计完抽奖前中后松耦合的结构模型后对于抽奖前要执行哪种抽奖但单向选择问题所以这里使用了责任链模式进行节点流程判断他在执行的时候就会判断是否需要黑名单过滤没有就走下一个继续判断你一共消耗了多少积如果积分值消耗达到了他的标准就会走权重范围抽奖的一个处理吗在权重范围抽奖中定义了一些必中的奖品在对应的库表里有个权重字段如果前两个都不符合就有个兜底策略直接普通抽奖所以使用责任链更为合适之后是进入抽奖的中和后这两部的流程是相对复杂的需要判断用户抽奖了几次对于不同的抽奖会限定是否能获得某个奖品同时还有库存的扣减如果库存不足或者不满足次抽奖得到某个奖品则会进行兜底那么这就是一个树规则的交叉流程所以会使用了组合模式构建一颗规则树并通过数据库表的动态配置决定在抽奖前完成后后续的流程要如何进行工厂的有些地方我们需要注入为了避免获取的时候写过多的呢把每一个这样实现的节点配置一个的注解指定他的名字将这个节点通过的方式注入到工厂注入的时候他会拿到你对应配置的名字和创建出来的对象关联写到里抽奖也是一种瞬时峰值很高的业务场景那么对于抽中奖品后的库存扣减是怎么做的关于库存的扣减是一个非常重要的流程尤其是这种单独资源竞争的场景如果设计的不好很容易把服务打挂所以在这套系统设计中为了避免库存扣减直接更新库表的行级锁而导致大量的用户进行等待状态所以把数据库表的库存同步到缓存中在通过扣减的方式进行消费同时保证不超卖而对每一条产生从值与抽奖的策略组合一个进行加锁兜底来保证不超卖那么最终同步库是怎么做的怎么降低对数据库的压力的保持最终一致性的设计在执行完库存的扣减操作后发送一个扣减到消息队列之后通过定时任务来消费队列通过控制执行频率降低对数据库的压力项目中你提到了可以支持不同场景的抽奖诉求比如多少积分后可以抽奖一个固定范围的奖品或者抽奖次后才可以中奖某个奖品这部分你是怎么做的库表怎么设计的这块的流程就是前面关于大营销抽奖领域模型的设计从而确定的库表设计也就是常说的领域驱动设计库表包括策略表策略明细库存概率规则奖品表规则表规则树个表抽奖奖品库存如何处理怎么保证最终一致性这里需要个步骤首先是每次扣减完库存都会写入到延迟队列延迟消息缓慢更新数据库库存之后是内的预热库存消耗完毕后发送最终消息更新数据库的剩余库存为最终活动结束后还有任务补偿扫描抽奖所产生的的参与记录单更新最终的库存消耗生产者可能多次发送同一个怎么保证奖品不会超发的消息是必须含带具有唯一标识的业务的消费者通过唯一业务更新或者写库的时候可以保证幂等性如果消息被重复消费数据库也会拒绝重复的写入操作这样也就不会产生超发的可能抽奖算法如何提供时间复杂度提高抽奖效率在活动开始前会从数据库中获取到个奖品的抽奖概率将概率转换为对应的整数数量写入到缓存中那么在抽奖的时候就按照整数数量生成随机数来抽奖这样用空间换时间的效率是非常高的在项目中使用消费者在拿到消息的同时系统宕机了怎么办在项目中使用消费者在拿到消息的同时系统宕机了怎么办消息确认机制提供了消费者确认机制消费者在成功处理完消息后发送确认才会将消息标记为已处理并从队列中删除如果消费者还没发送确认就宕机消息会被重新投入队列由其他消费者或恢复后的消费者重新消费这种机制确保了消息不会丢失将消息持久化确保队列和消息都设置为持久化和这样即使或系统本身崩溃未处理的消息也会保留在队列中不会丢失处理消息处理成功手动确认消息处理失败拒绝消息或不确认重回队列在配置文件中配置方法中传入和参数设置队列持久化插入数据库操作手动确认消息已成功处理处理失败拒绝消息并重新入队消息失败通过注解可以将注入方法中是客户端和服务器之间的一个通信通道代表一个会话所有的消息发送和接收操作都是通过完成的在消息传递过程中自动生成并维护的一个唯一标识用来标记每条消息在消费者端的唯一位置以便在确认或拒绝时引用该消息为什么自研路由组件如果面试问为什么要自研市面不是有吗怎么回答可以从以下个点解答维护性市面的路由组件比如但过于庞大还需要随着版本做一些升级而我们需要更少的维护成本扩展性结合自身的业务需求我们的路由组件可以分库分表自定义路由协议扫描指定库表数据等各类方式研发扩展性好简单易用安全性自研的组件更好的控制了安全问题不会因为一些额外引入的包造成安全风险当然我们的组件主要是为了更好的适应目前系统的诉求所以使用自研的方式处理就像的市场占有率也不是那么肯定还有很多公司在自研甚至各个大厂也都自研一整套分布式服务来让自己的系统更稳定的运行分库分表基本是单表万才分那么面试怎么说你们为什么分库分表我们分库分表用的非常熟但不能为了等到系统到了万数据才拆那么工作量会非常大我们的做法是因为有成熟方案所以前期就分库分表了但为了解释服务器空间所以把分库分表的库用服务器虚拟出来机器安装这样即不过多的占用服务器资源也方便后续数据量真的上来了好拆分同时抽奖系统是瞬时峰值较高的系统历史数据不一定多所以我们希望用户可以快速的检索到个人数据做最优响应因为大家都知道抽奖这东西发完基本就分钟结束分钟人都没了所以我们这也是做了分库分表的理由秒杀的滑块锁讲解是针对于用户参与的活动库存加锁的如果是独占锁是针对于活动加锁的滑块锁的核心是去竞态避免独占影响系统的响应性能关于此类锁这里又做了视频做了详细的讲解虫洞栈如图别看提秒杀一堆人说但如果还讲用独占锁做活动的秒杀场景就没做过大规模的秒杀独占是会很大概率出事故的那为什么加一个锁呢不就可以加锁是兜底你不知道什么时候会出现不对的情况如集群配置问题特例出现问题需要恢复库存如果没有锁可能会超卖第一条评论加了说明对于非交易的活动类场景要的就是一个快快速响应快速释放可接受容错失败概率但不要磨磨唧唧影响我的主核心交易链路但凡在双营销敢超时就直接下掉保证用户可下单可支付否则这黄金时间点你耽误分钟都是几个亿的成交额所以这类营销秒杀场景下根本就是保证不超卖也不恢复库存注意独占锁是加给个人流程的无资源竞争如贷款单受理分段滑块无锁化是加给库存的有资源竞争如秒杀商品发货等集中资源类就跟大超时的收银台一样原来就个出口后来一排出口在后来又有无人化的电子出口点点那个软件举例的速度很快就像进入了公共的卫生间一个坑一个门谁进去谁就锁上没有就跑到下一个门你说你不锁门吧也没问题但别人不知道一拽开就比较尴尬所以要加锁锁门',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2025-02-08 16:53:37',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/ChestnutDuck/StudyRepository.github.io.git/atom.xml" title="Duckkkkk·博客" type="application/atom+xml">
+</head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="/ChestnutDuck/StudyRepository.github.io.git/img/touxiang.jpg"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.10/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><div class="back-home-button"><i class="anzhiyufont anzhiyu-icon-grip-vertical"></i><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://chestnutduck.github.io/" title="Duckkkkk·博客"><img class="back-menu-item-icon" src="/img/siteicon/64.png" alt="Duckkkkk·博客"/><span class="back-menu-item-text">Duckkkkk·博客</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" href="https://github.com/ChestnutDuck/StudyRepository" title="项目仓库"><img class="back-menu-item-icon" src="/img/siteicon/github.png" alt="项目仓库"/><span class="back-menu-item-text">项目仓库</span></a></div></div></div></div><a id="site-name" href="/ChestnutDuck/StudyRepository.github.io.git/" accesskey="h"><div class="title">Duckkkkk·博客</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><div class="nav-button" id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" title="搜索🔍" accesskey="s"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span> 搜索</span></a></div><input id="center-console" type="checkbox"/><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="article-meta tags"></span></div></div><h1 class="post-title" itemprop="name headline">无题</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2024-10-28T12:14:17.755Z" title="发表于 2024-10-28 20:14:17">2024-10-28</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2025-02-08T08:53:37.525Z" title="更新于 2025-02-08 16:53:37">2025-02-08</time></span></div><div class="meta-secondline"><span class="post-meta-separator"></span><span class="post-meta-wordcount"><i class="anzhiyufont anzhiyu-icon-file-word post-meta-icon" title="文章字数"></i><span class="post-meta-label" title="文章字数">字数总计:</span><span class="word-count" title="文章字数">9.9k</span><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-clock post-meta-icon" title="阅读时长"></i><span class="post-meta-label" title="阅读时长">阅读时长:</span><span>31分钟</span></span><span class="post-meta-separator"></span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="anzhiyufont anzhiyu-icon-fw-eye post-meta-icon"></i><span class="post-meta-label" title="阅读量">阅读量:</span><span id="busuanzi_value_page_pv"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></span><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为衡阳"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>衡阳</span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src=""></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope itemtype="https://github.com/ChestnutDuck/StudyRepository.github.io.git/posts/0.html"><header><h1 id="CrawlerTitle" itemprop="name headline">无题</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">Duckkkkk</span><time itemprop="dateCreated datePublished" datetime="2024-10-28T12:14:17.755Z" title="发表于 2024-10-28 20:14:17">2024-10-28</time><time itemprop="dateCreated datePublished" datetime="2025-02-08T08:53:37.525Z" title="更新于 2025-02-08 16:53:37">2025-02-08</time></header><h1 id="Bean的生命周期"><a href="#Bean的生命周期" class="headerlink" title="Bean的生命周期"></a>Bean的生命周期</h1><ol>
+<li><p><strong>实例化 Bean</strong>：Bean 容器根据配置文件中的 Bean 定义，通过反射机制创建 Bean 的实例。</p>
+</li>
+<li><p><strong>设置属性和依赖</strong>：为 Bean 设置相关的属性和依赖项。</p>
+</li>
+<li><p><strong>初始化 Bean</strong>：</p>
+<ul>
+<li>检查是否实现了相关的 Aware 接口，并设置相应的依赖。</li>
+<li>检查bean是否实现了 <code>BeanPostProcessor</code> 接口进行前置处理。</li>
+<li>如果 Bean 实现了 <code>InitializingBean</code> 接口，调用其 <code>afterPropertiesSet()</code> 方法。</li>
+<li>如果在配置文件中定义了 <code>init-method</code>，则执行相应的方法。</li>
+<li>如果需要在初始化后执行操作，可以实现 <code>BeanPostProcessor</code> 接口进行后置处理。</li>
+</ul>
+<p><strong>Bean 被容器管理并在程序中使用</strong>。</p>
+<p><strong>销毁 Bean</strong>：</p>
+<ul>
+<li>如果 Bean 实现了 <code>DisposableBean</code> 接口，则调用 <code>destroy()</code> 方法销毁bean，没有实现接口就检查配置文件是否指定destroy-method 指定就调用对应的销毁方法销毁bean</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/ChestnutDuck/StudyRepository.github.io.git/image-20241028203935275.png" alt="image-20241028203935275"></p>
+<p>如果两个都没实现，Spring将不会执行任何销毁操作，导致bean的资源不会被自动释放，会出现oom或资源占用的问题</p>
+</li>
+</ol>
+<h1 id="SpringBoot的启动流程"><a href="#SpringBoot的启动流程" class="headerlink" title="SpringBoot的启动流程"></a>SpringBoot的启动流程</h1><ol>
+<li>555启动main方法 从main方法启动，并通过SpringBootApplication.run()会初始化一个SpringApplication对象.</li>
+<li>运行SpringApplication的过程中Spring Boot 会创建应用的监听器并开始监听启动过程中发生的事件，SpringBoot会创建和配置一个 <code>Environment</code>，用来加载系统变量、环境变量、配置文件等，确定应用环境，然后根据应用类型选择合适的 ApplicationContext，并将环境变量、监听器与应用上下文关联起来。</li>
+<li>Spring Boot 会扫描项目中定义的所有 Bean，并将它们注册到 Spring 容器中。自动配置和手动配置的 Bean 也会在此时加载。</li>
+<li>如果是 Web 应用，Spring Boot 会启动嵌入式服务器（如 Tomcat 或 Jetty），并初始化相关 Web 组件。</li>
+<li>所有初始化和配置完成后，Spring Boot 会显示启动成功的日志，整个应用正式进入运行状态。</li>
+</ol>
+<h1 id="什么是SpringBoot"><a href="#什么是SpringBoot" class="headerlink" title="什么是SpringBoot"></a>什么是SpringBoot</h1><p>SpringBoot是简化spring应用程序开发的框架，它的主要目标是减少Spring应用程序的配置和开发复杂性，使我们快速构建、测试和部署Spring应用</p>
+<h1 id="Spring-Boot-的核心特性可以概括为以下几点"><a href="#Spring-Boot-的核心特性可以概括为以下几点" class="headerlink" title="Spring Boot 的核心特性可以概括为以下几点"></a>Spring Boot 的核心特性可以概括为以下几点</h1><ol>
+<li><strong>自动配置（Auto-Configuration）</strong>：Spring Boot 会根据项目中添加的依赖自动配置 Spring 应用的常用组件，避免了手动配置，简化了开发流程。</li>
+<li><strong>Starter 依赖（Starter Dependencies）</strong>：Spring Boot 提供了一组“Starter”依赖，开发者只需引入这些依赖，就能快速集成相关功能，无需繁琐的依赖管理。</li>
+<li><strong>内嵌服务器（Embedded Server）</strong>：Spring Boot 支持内嵌的 Web 服务器（如 Tomcat、Jetty、Undertow），可以直接将应用打包成一个可执行的 JAR 文件，启动时无需外部应用服务器。</li>
+<li><strong>无 XML 配置</strong>：Spring Boot 倾向于使用 Java 注解和 Java 配置类进行配置，减少了传统 Spring 中复杂的 XML 配置文件。</li>
+<li><strong>简化的开发和部署</strong>：Spring Boot 应用可以通过单个命令（如 <code>java -jar app.jar</code>）运行，简化了应用的开发和部署过程，适合快速迭代。</li>
+</ol>
+<h1 id="Spring-Boot-支持多种内嵌服务器"><a href="#Spring-Boot-支持多种内嵌服务器" class="headerlink" title="Spring Boot 支持多种内嵌服务器"></a>Spring Boot 支持多种内嵌服务器</h1><ol>
+<li><strong>Apache Tomcat</strong>：默认的内嵌服务器，适合大多数 Web 应用开发，支持 Servlet 和 JSP。</li>
+<li><strong>Jetty</strong>：一个轻量级的服务器，适合需要高性能和可嵌入性应用的场景，特别是微服务架构中。</li>
+<li><strong>Undertow</strong>：一个灵活的、轻量级的 Web 服务器，支持异步处理，适用于高性能应用和微服务。</li>
+<li><strong>Netty</strong>：一个非阻塞的异步事件驱动网络应用框架，通常用于高性能的网络应用开发。</li>
+</ol>
+<h1 id="Spring-Boot-中-application-properties-和-application-yml-的区别是什么？"><a href="#Spring-Boot-中-application-properties-和-application-yml-的区别是什么？" class="headerlink" title="Spring Boot 中 application.properties 和 application.yml 的区别是什么？"></a>Spring Boot 中 application.properties 和 application.yml 的区别是什么？</h1><p>对于配置而言效果是一样的，区别就是书写格式</p>
+<p>application.properties 使用键值对配置，键和值之间用等号或冒号分隔</p>
+<p>application.yml 使用YAMl格式，具有层次结构，使用缩进表示嵌套关系，适合复杂配置，阅读性更好</p>
+<h1 id="Spring-Boot-配置文件的加载顺序"><a href="#Spring-Boot-配置文件的加载顺序" class="headerlink" title="Spring Boot 配置文件的加载顺序"></a>Spring Boot 配置文件的加载顺序</h1><p>优先级最高的是命令行参数通过 <code>java -jar</code> 启动时传入的命令行参数&gt;JAR 包外的application-{profile}-properties&gt;JAR包内的application-{profile}-properties&gt;jar包外的application-properties &gt;JAR包内的application-properties</p>
+<p>注意如果application.properties、application.yml两个文件同时存在，properties优先级会高一些，相同名称的配置，会将yml内的配置覆盖掉。当我们使用Bootstrap.yml连接配置中心的配置信息，因为bootstrap.yml是在spring应用上下文刷新之前就会被加载。所以Bootstrap.yml 的优先级要高于application.yml,后加载的application.yml不会覆盖相同的配置信息</p>
+<h1 id="Spring-Boot-打成的-jar和普通的-jar-有什么区别"><a href="#Spring-Boot-打成的-jar和普通的-jar-有什么区别" class="headerlink" title="Spring Boot 打成的 jar和普通的 jar 有什么区别"></a>Spring Boot 打成的 jar和普通的 jar 有什么区别</h1><ol>
+<li>Spring Boot 项目最终打包成的 jar包含了内嵌的服务器和 <code>Main-Class</code> 指定的启动类 这种 jar 可以直接通过 java -jar  命令来运行</li>
+<li><strong>目录结构不同，无法作为依赖使用</strong>：Spring Boot 使用 Spring Boot Maven&#x2F;Gradle 插件进行打包，生成的 JAR 结构与普通 JAR 不同，应用代码位于 <code>BOOT-INF/classes</code>，依赖库位于 <code>BOOT-INF/lib</code> 中。而普通 JAR 文件通常将所有类和资源文件直接放在 JAR 根目录下。因此，Spring Boot 的 JAR 包含的依赖管理和目录结构使它无法被其他项目直接依赖使用。</li>
+</ol>
+<h1 id="如何理解Spring-Boot中的starter"><a href="#如何理解Spring-Boot中的starter" class="headerlink" title="如何理解Spring Boot中的starter"></a>如何理解Spring Boot中的starter</h1><p>在SpringBoot中，starter是一组有用的依赖集合，用于简化构建配置。SpringBoot通过Starter Pom提供了各种常用功能模块的集成，我们只需引入一个Starter依赖，便可以获得该模块的所有相关依赖和配置，无需手动添加多个依赖库和配置文件</p>
+<h1 id="SpringBoot如何处理跨域请求"><a href="#SpringBoot如何处理跨域请求" class="headerlink" title="SpringBoot如何处理跨域请求"></a>SpringBoot如何处理跨域请求</h1><p>什么是跨域请求</p>
+<p>跨域请求问题是指在 Web 应用中，当一个网页试图从不同的源（域名、协议或端口）请求资源时，浏览器会出于安全原因限制这些请求。这种机制被称为同源策略（Same-Origin Policy），它是浏览器的安全特性，用于防止恶意网站获取用户数据</p>
+<ol>
+<li>使用 @CrossOrigin 注解，在控制器方法或类上添加 <code>@CrossOrigin</code> 注解，以允许特定的跨域请求。这种方法适合需要灵活配置跨域的场景，可以针对不同的请求源进行控制</li>
+<li>可以在 Spring Boot 的配置类中全局配置 跨域资源共享(CORS)，这样应用中的所有控制器都能使用相同的跨域策略。通过实现 <code>WebMvcConfigurer</code> 接口，并重写 <code>addCorsMappings</code> 方法来解决跨域问题。这种方法适合于应用中需要统一管理跨域请求的场景。</li>
+</ol>
+<h1 id="SpringBoot拦截器是什-么？有没有在程序中使用过"><a href="#SpringBoot拦截器是什-么？有没有在程序中使用过" class="headerlink" title="SpringBoot拦截器是什 么？有没有在程序中使用过"></a>SpringBoot拦截器是什 么？有没有在程序中使用过</h1><p>Spring Boot 拦截器是一种用于处理请求和响应的组件，它可以在请求到达控制器之前或在响应返回之前进行处理允许开发者添加一些自定义的逻辑</p>
+<p>Spring Boot 中，拦截器通常通过实现 <code>HandlerInterceptor</code> 接口，并重写其中的方法来实现自定义的拦截逻辑。。</p>
+<p>为了使拦截器生效，需要在配置类中通过实现 <code>WebMvcConfigurer</code> 接口，重写 <code>addInterceptors</code> 方法来注册拦截器，添加拦截配置。</p>
+<h1 id="SpringBoot-中如何实现定时任务"><a href="#SpringBoot-中如何实现定时任务" class="headerlink" title="SpringBoot 中如何实现定时任务 ?"></a>SpringBoot 中如何实现定时任务 ?</h1><p>实现定时任务可以使用 <code>@Scheduled</code> 注解。通过该注解可以很方便地定义方法在指定的时间间隔或特定的时间点执行。</p>
+<p>步骤：</p>
+<ol>
+<li>在启动类上添加 <code>@EnableScheduling</code> 注解，启用 Spring 的定时任务支持。</li>
+<li>在需要的方法上面添加@Scheduled注解来指定任务的执行规则。</li>
+</ol>
+<p>可以使用 cron 表达式来控制任务的执行时间。 （* * * * *）第一个是每小时的第几分钟，第二个是小时，月的天数，年的月数 星期</p>
+<h1 id="对-Spring-Boot-事件机制的了解"><a href="#对-Spring-Boot-事件机制的了解" class="headerlink" title="对 Spring Boot 事件机制的了解"></a>对 Spring Boot 事件机制的了解</h1><p>Spring Boot 的事件机制通过发布订阅模式，主要应用于应用程序中各个组件之间进行消息传递和解耦，通过事件发布和监听机制，实现了不同组件之间的松耦合</p>
+<p>事件机制的主要组成部分</p>
+<ol>
+<li>自定义一个事件类继承 ApplicationEvent</li>
+<li>事件发布者是发布事件的组件。可以通过 <code>ApplicationEventPublisher</code> 接口来发布事件</li>
+<li>事件监听器是处理特定事件的组件。可以通过 <code>@EventListener</code> 注解或实现 <code>ApplicationListener</code> 接口来定义监听器。</li>
+</ol>
+<p>Spring Boot 支持同步和异步事件传播。通过在事件监听器方法上添加 <code>@Async</code> 注解，可以实现异步处理，提升性能。</p>
+<h1 id="Spring-Boot-中如何实现异步处理？"><a href="#Spring-Boot-中如何实现异步处理？" class="headerlink" title="Spring Boot 中如何实现异步处理？"></a><strong>Spring Boot 中如何实现异步处理？</strong></h1><p> <code>@Async</code> 注解 指定某个方法在另一个线程中异步执行</p>
+<ul>
+<li>在启动类上添加<code>@EnableAsync</code> 注解来启用异步处理</li>
+<li><code>@Async</code> 注解标记希望异步执行的方法要注意异步方法是公共的且不能在同一个类中调用</li>
+</ul>
+<p>异步方法出现异常 可以在内部处理 try catch捕获，如果你希望在调用者处检查异步方法的结果和异常，可以让异步方法返回 <code>Future&lt;T&gt;</code> 或 <code>CompletableFuture&lt;T&gt;</code>。这样，你可以在调用处使用 <code>get()</code> 方法来获取结果或捕获异常。</p>
+<h1 id="和-的区别是什么"><a href="#和-的区别是什么" class="headerlink" title="#{} 和 ${} 的区别是什么"></a><strong>#{} 和 ${} 的区别是什么</strong></h1><ul>
+<li><code>#&#123;&#125;</code>：SQL 参数占位符，MyBatis 会将 <code>#&#123;&#125;</code> 中的内容转换为 SQL 的 <code>?</code> 占位符，然后在执行 SQL 前使用 JDBC的<code>PreparedStatement</code> 按顺序给 sql 的? 号占位符设置参数值 ，MyBatis 会自动处理传入参数的数据类型转换，并且这种方式可以防止 SQL 注入。</li>
+<li><code>$&#123;&#125;</code>是 Properties 文件中的变量占位符，通常用于动态 SQL 生成的场景，在 SQL 中，它会直接将占位符替换为传入的文本内容，但是这种替换没有类型安全，MyBatis 不会对插入的内容进行预处理。</li>
+</ul>
+<h1 id="MyBatis-是如何进行分页的？分页插件的原理是什么"><a href="#MyBatis-是如何进行分页的？分页插件的原理是什么" class="headerlink" title="MyBatis 是如何进行分页的？分页插件的原理是什么"></a><strong>MyBatis 是如何进行分页的</strong>？<strong>分页插件的原理是什么</strong></h1><ul>
+<li>MyBatis 使用 RowBounds 对象进行逻辑分页，但这种方式会查询所有数据，再截取所需的数据，所以不适合大数据量的场景：</li>
+<li>在 SQL 中直接编写数据库的分页语法（如 <code>LIMIT</code> 和 <code>OFFSET</code>）来实现分页</li>
+<li>使用<strong>PageHelper</strong> 插件来完成物理分页。PageHelper 可以自动处理分页参数并生成分页 SQL。</li>
+<li>分页插件的基本原理是使用 MyBatis 提供的插件接口，实现自定义插件，在插件的拦截方法内拦截待执行的 sql，然后重写 sql，根据 dialect 方言，添加对应的物理分页语句和物理分页参数。</li>
+</ul>
+<h1 id="简述-MyBatis-的插件运行原理，以及如何编写一个插件"><a href="#简述-MyBatis-的插件运行原理，以及如何编写一个插件" class="headerlink" title="简述 MyBatis 的插件运行原理，以及如何编写一个插件"></a>简述 MyBatis 的插件运行原理，以及如何编写一个插件</h1><p>MyBatis 使用 JDK 的动态代理，为需要拦截的接口生成代理对象来实现接口方法拦截功能，MyBatis 仅可以编写针对 <code>ParameterHandler</code>、 <code>ResultSetHandler</code>、 <code>StatementHandler</code>、 <code>Executor</code> 这 4 种接口的插件，每当执行这 4 种接口对象的方法时，就会进入拦截方法，具体就是 <code>InvocationHandler</code> 的 <code>invoke()</code> 方法，也可以通过 <code>@Intercepts</code> 和 <code>@Signature</code> 注解来指定要拦截的接口和方法</p>
+<p>如何编写插件：</p>
+<p>创建一个插件类，实现 MyBatis 的 <code>Interceptor</code> 接口，并重写 <code>intercept()</code> 方法使用 <code>@Intercepts</code> 和 <code>@Signature</code> 注解来指定要拦截的接口和方法。在 MyBatis 的配置文件（如 <code>mybatis-config.xml</code>）或 Spring Boot 的配置类中注册插件。 </p>
+<h1 id="MyBatis-动态-sql-是做什么的？都有哪些动态-sql？能简述一下动态-sql-的执行原理不？"><a href="#MyBatis-动态-sql-是做什么的？都有哪些动态-sql？能简述一下动态-sql-的执行原理不？" class="headerlink" title="MyBatis 动态 sql 是做什么的？都有哪些动态 sql？能简述一下动态 sql 的执行原理不？"></a>MyBatis 动态 sql 是做什么的？都有哪些动态 sql？能简述一下动态 sql 的执行原理不？</h1><p>MyBatis 动态 sql 可以让我们在 xml 映射文件内，以标签的形式编写动态 sql，完成逻辑判断和动态拼接 sql 的功能</p>
+<p>MyBatis 在启动时解析 XML 配置文件，将 SQL 模板和动态 SQL 标签转换为一个内部的节点树结构。每个动态标签都对应一个节点，MyBatis 使用 OGNL表达式，从传入的 SQL 参数对象中动态获取属性的值，用于判断条件是否满足 ，当条件为真时，MyBatis 会将对应的 SQL 片段加入最终的 SQL 语句中。MyBatis 将生成                                     的 SQL 语句与参数绑定后传递给数据库执行，完成查询或更新操作。</p>
+<p>if where choose foreach</p>
+<h1 id="MyBatis-执行批量插入，能返回数据库主键列表吗？"><a href="#MyBatis-执行批量插入，能返回数据库主键列表吗？" class="headerlink" title="MyBatis 执行批量插入，能返回数据库主键列表吗？"></a>MyBatis 执行批量插入，能返回数据库主键列表吗？</h1><p>在 MyBatis XML 配置文件的 <code>&lt;insert&gt;</code> 标签中，设置 <code>useGeneratedKeys=&quot;true&quot;</code>MyBatis 会在执行插入操作时自动获取数据库生成的主键并将其设置到插入对象的主键属性上可以通过keyProperty指明实体类中的主键字段。</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">insert</span> <span class="attr">id</span>=<span class="string">&quot;batchInsert&quot;</span> <span class="attr">parameterType</span>=<span class="string">&quot;java.util.List&quot;</span> <span class="attr">useGeneratedKeys</span>=<span class="string">&quot;true&quot;</span> <span class="attr">keyProperty</span>=<span class="string">&quot;id&quot;</span>&gt;</span></span><br><span class="line">    INSERT INTO table_name (column1, column2) VALUES</span><br><span class="line">    <span class="tag">&lt;<span class="name">foreach</span> <span class="attr">collection</span>=<span class="string">&quot;list&quot;</span> <span class="attr">item</span>=<span class="string">&quot;item&quot;</span> <span class="attr">separator</span>=<span class="string">&quot;,&quot;</span>&gt;</span></span><br><span class="line">        (#&#123;item.column1&#125;, #&#123;item.column2&#125;)</span><br><span class="line">    <span class="tag">&lt;/<span class="name">foreach</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">insert</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="MyBatis-是如何将-sql-执行结果封装为目标对象并返回的"><a href="#MyBatis-是如何将-sql-执行结果封装为目标对象并返回的" class="headerlink" title="MyBatis 是如何将 sql 执行结果封装为目标对象并返回的"></a>MyBatis 是如何将 sql 执行结果封装为目标对象并返回的</h1><p>使用 <code>&lt;resultMap&gt;</code> 标签，逐一定义列名和对象属性名之间的映射关系，有了列名与属性名的映射关系后，MyBatis 通过反射创建对象，同时使用反射给对象的属性逐一赋值并返回</p>
+<h1 id="MyBatis-能执行一对一、一对多的关联查询吗？都有哪些实现方式，以及它们之间的区别"><a href="#MyBatis-能执行一对一、一对多的关联查询吗？都有哪些实现方式，以及它们之间的区别" class="headerlink" title="MyBatis 能执行一对一、一对多的关联查询吗？都有哪些实现方式，以及它们之间的区别"></a>MyBatis 能执行一对一、一对多的关联查询吗？都有哪些实现方式，以及它们之间的区别</h1><p>MyBatis 支持一对一、一对多、多对一以及多对多的关联查询。MyBatis 使用 <code>&lt;association&gt;</code> 和 <code>&lt;collection&gt;</code> 标签来区分不同的关联关系，一对一和多对一：使用 <code>&lt;association&gt;</code> 标签映射单个关联对象。一对多和多对多：使用 <code>&lt;collection&gt;</code> 标签映射集合类型的关联对象。</p>
+<p>关联对象查询有两种实现方式：</p>
+<ol>
+<li><strong>多次 SQL 查询</strong>：即延迟加载，首先加载主对象，随后根据主对象的属性再分别查询其关联对象。这种方式适用于需要懒加载的场景。</li>
+<li><strong>嵌套查询</strong>：通过一次 SQL 查询使用 <code>JOIN</code> 将主对象和关联对象的数据一起查询出来。适用于一次性获取所有关联数据的场景。</li>
+</ol>
+<h2 id="join-查询出来-100-条记录，如何确定主对象是-5-个，而不是-100-个？"><a href="#join-查询出来-100-条记录，如何确定主对象是-5-个，而不是-100-个？" class="headerlink" title="join 查询出来 100 条记录，如何确定主对象是 5 个，而不是 100 个？"></a>join 查询出来 100 条记录，如何确定主对象是 5 个，而不是 100 个？</h2><p>MyBatis 的去重机制通过 <code>&lt;resultMap&gt;</code> 中的 <code>&lt;id&gt;</code> 标签来实现，MyBatis 会根据 <code>&lt;id&gt;</code> 标签指定的列值判断和合并重复的主对象实例，将关联对象加入到主对象的集合中。</p>
+<h1 id="MyBatis延迟加载的实现原理是什么？"><a href="#MyBatis延迟加载的实现原理是什么？" class="headerlink" title="MyBatis延迟加载的实现原理是什么？"></a>MyBatis延迟加载的实现原理是什么？</h1><p>在 MyBatis 中，可以通过配置 <code>lazyLoadingEnabled=true</code> 来启用延迟加载机制。MyBatis 使用 <code>CGLIB</code> 或 <code>JDK 动态代理</code> 创建关联对象的代理对象，当调用关联属性的方法时就会进入代理的拦截器逻辑。</p>
+<p>例如，当执行 <code>a.getB().getName()</code> 时，拦截器会检查 <code>a.getB()</code> 是否已加载。如果 <code>a.getB()</code> 为 <code>null</code>，则拦截器会执行事先保存的 SQL 查询来获取关联对象 <code>B</code>，然后调用 <code>a.setB(b)</code> 将查询结果赋值给 <code>a</code> 的 <code>b</code> 属性，最后完成 <code>a.getB().getName()</code> 的调用。这就是 MyBatis 延迟加载的基本原理。</p>
+<h1 id="MyBatis-的-xml-映射文件中，不同的-xml-映射文件，id-是否可以重复？"><a href="#MyBatis-的-xml-映射文件中，不同的-xml-映射文件，id-是否可以重复？" class="headerlink" title="MyBatis 的 xml 映射文件中，不同的 xml 映射文件，id 是否可以重复？"></a>MyBatis 的 xml 映射文件中，不同的 xml 映射文件，id 是否可以重复？</h1><p>不同的 xml 映射文件，如果配置了 namespace，那么 id 可以重复；如果没有配置 namespace，那么 id 不能重复，原因就是 namespace+id 是作为 <code>Map&lt;String, MappedStatement&gt;</code> 的 key 使用的，如果没有 namespace，就剩下 id，那么，id 重复会导致数据互相覆盖。</p>
+<h1 id="MyBatis-中如何执行批处理"><a href="#MyBatis-中如何执行批处理" class="headerlink" title="MyBatis 中如何执行批处理"></a>MyBatis 中如何执行批处理</h1><p>批处理允许在一个数据库连接上累积多条 SQL 操作，减少数据库交互次数</p>
+<p>通过 <code>SqlSession</code> 提供的 <code>ExecutorType.BATCH</code> 模式来执行批处理。</p>
+<h1 id="MyBatis-都有哪些-Executor-执行器？它们之间的区别是什么"><a href="#MyBatis-都有哪些-Executor-执行器？它们之间的区别是什么" class="headerlink" title="MyBatis 都有哪些 Executor 执行器？它们之间的区别是什么"></a>MyBatis 都有哪些 Executor 执行器？它们之间的区别是什么</h1><p>MyBatis 有三种基本的 <code>Executor</code> 执行器：</p>
+<ul>
+<li><strong><code>SimpleExecutor</code>：</strong> 每执行一次 update 或 select，就开启一个 Statement 对象，用完立刻关闭 Statement 对象。</li>
+<li><strong><code>ReuseExecutor</code>：</strong> 执行 update 或 select，以 sql 作为 key 查找 Statement 对象，存在就使用，不存在就创建，用完后，不关闭 Statement 对象，而是放置于 Map&lt;String, Statement&gt;内，供下一次使用。简言之，就是重复使用 Statement 对象。</li>
+<li>**<code>BatchExecutor</code>**： 是 MyBatis 用于批处理的执行器。调用 <code>update</code> 执行 SQL 操作时，<code>BatchExecutor</code> 会将每个 SQL 通过 <code>addBatch()</code> 添加到批处理队列中，而不会立即执行，这些 SQL 操作会被缓存在不同的 <code>Statement</code> 对象中——每个不同的 SQL 操作或表对应一个独立的 <code>Statement</code>。<code>BatchExecutor</code> 会缓存这些 <code>Statement</code> 对象，以便在执行批处理时可以一次性地执行它们的批量操作。BatchExecutor在 <code>flushStatements()</code> 或 <code>commit()</code> 调用时将所有 SQL 一次性发送到数据库执行。</li>
+</ul>
+<h1 id="MyBatis-中如何指定使用哪一种-Executor-执行器？"><a href="#MyBatis-中如何指定使用哪一种-Executor-执行器？" class="headerlink" title="MyBatis 中如何指定使用哪一种 Executor 执行器？"></a>MyBatis 中如何指定使用哪一种 Executor 执行器？</h1><ul>
+<li><p>在MyBatis全局配置文件中，通过 <code>&lt;settings&gt;</code> 标签的 <code>defaultExecutorType</code> 属性来指定 <code>Executor</code> 的类型</p>
+</li>
+<li><p>使用 <code>SqlSessionFactory</code> 来动态指定 <code>Executor</code> 类型</p>
+</li>
+</ul>
+<h1 id="MyBatis-映射文件中，如果-A-标签通过-include-引用了-B-标签的内容，请问，B-标签能否定义在-A-标签的后面，还是说必须定义在-A-标签的前面？"><a href="#MyBatis-映射文件中，如果-A-标签通过-include-引用了-B-标签的内容，请问，B-标签能否定义在-A-标签的后面，还是说必须定义在-A-标签的前面？" class="headerlink" title="MyBatis 映射文件中，如果 A 标签通过 include 引用了 B 标签的内容，请问，B 标签能否定义在 A 标签的后面，还是说必须定义在 A 标签的前面？"></a>MyBatis 映射文件中，如果 A 标签通过 include 引用了 B 标签的内容，请问，B 标签能否定义在 A 标签的后面，还是说必须定义在 A 标签的前面？</h1><p>虽然 MyBatis 解析 xml 映射文件是按照顺序解析的，但是，被引用的 B 标签依然可以定义在任何地方，MyBatis 都可以正确识别。原理是，MyBatis 解析 A 标签，发现 A 标签引用了 B 标签，但是 B 标签尚未解析到，，此时，MyBatis 会将 A 标签标记为未解析状态，然后继续解析剩下的标签，待所有标签解析完毕，MyBatis 会重新解析那些被标记为未解析的标签，此时再解析 A 标签时，B 标签已经存在，A 标签也就可以正常解析完成了。</p>
+<h1 id="为什么说-MyBatis-是半自动-ORM-映射工具？它与全自动的区别在哪里？"><a href="#为什么说-MyBatis-是半自动-ORM-映射工具？它与全自动的区别在哪里？" class="headerlink" title="为什么说 MyBatis 是半自动 ORM 映射工具？它与全自动的区别在哪里？"></a>为什么说 MyBatis 是半自动 ORM 映射工具？它与全自动的区别在哪里？</h1><p>而 MyBatis 在查询关联对象或关联集合对象时，需要手动编写 sql 来完成，所以，称之为半自动 ORM 映射工具，Hibernate 属于全自动 ORM 映射工具，使用 Hibernate 查询关联对象或者关联集合对象时，可以根据对象关系模型直接获取，所以它是全自动的。</p>
+<h1 id="什么是SpringBoot的自动装配"><a href="#什么是SpringBoot的自动装配" class="headerlink" title="什么是SpringBoot的自动装配"></a>什么是SpringBoot的自动装配</h1><p>SpringBoot 定义了一套接口规范，这套规范规定：SpringBoot 在启动时会扫描外部引用 jar 包中的<code>META-INF/spring.factories</code>文件，将文件中配置的类型信息加载到 Spring 容器，并执行类中定义的各种操作。如果我们需要引入第三方依赖，只需引入Starter依赖 ，通过少量注解和一些简单的配置就能使用第三方组件提供的功能了</p>
+<h2 id="SpringBoot自动装配的原理"><a href="#SpringBoot自动装配的原理" class="headerlink" title="SpringBoot自动装配的原理"></a>SpringBoot自动装配的原理</h2><p>Spring Boot 的自动装配是通过 <code>@EnableAutoConfiguration</code> 注解启动的，它利用 <code>@Import</code> 引入 <code>AutoConfigurationImportSelector</code>，该类最终调用 <code>SpringFactoriesLoader.loadSpringFactories</code> 方法，从 <code>META-INF/spring.factories</code> 文件中读取要加载的自动配置类。这些配置类会被加载到 Spring 容器中，供后续的条件筛选使用。接下来，通过 <code>@ConditionalOnXXX</code> 注解判断是否应该创建或注入特定的 Bean。然后Spring 会筛选出自动配置类中符合条件的 Bean 定义，并在需要时实例化并注入到 Spring 容器中，实现按需装配，避免不必要的加载。</p>
+<h1 id="Spring的事务在什么时候会失效"><a href="#Spring的事务在什么时候会失效" class="headerlink" title="Spring的事务在什么时候会失效"></a>Spring的事务在什么时候会失效</h1><p>在方法上定义了错误的访问权限，就会导致事务失效, 因为spring 要求被代理方法必须是<code>public</code>的</p>
+<p>方法用 final或 static 修饰，无法通过动态代理，变成事务方法，这样也会导致事务失效。</p>
+<p>在某个 Service 类的某个方法中，调用另外一个事务方法。</p>
+<p>一个类没有交给 spring 管理，方法也不会生成事务。</p>
+<p>在多线程中用spring事务，可能会导致两个方法不在同一个线程中，获取到的数据库连接不一样，形成了两个不同的事务。</p>
+<h1 id="Mybatis的一级缓存和二级缓存"><a href="#Mybatis的一级缓存和二级缓存" class="headerlink" title="Mybatis的一级缓存和二级缓存"></a>Mybatis的一级缓存和二级缓存</h1><p>一级缓冲：一级缓存是<strong>SqlSession级别</strong>的缓存，作用范围在同一个SqlSession中。当我们在相同的SqlSession中，使用相同的参数和SQL语句查询时，MyBatis会优先从缓存中取数据，而不再发送SQL到数据库。一级缓存默认开启，在执行增删改、手动清空、或SqlSession关闭后，一级缓存会失效。</p>
+<p>二级缓存：二级缓存存储的是整个 <code>SqlSessionFactory</code> 范围内的查询结果。在同一个 <code>SqlSessionFactory</code> 下创建的SqlSession之间的数据可以共享。二级缓存默认关闭，需要通过在全局配置中启用<code>&lt;setting name=&quot;cacheEnabled&quot; value=&quot;true&quot;/&gt;</code>或在Mapper文件中使用<code>&lt;cache /&gt;</code>标签启用。如果同一Mapper中执行了增删改操作，二级缓存也会自动清空，以确保数据一致性。</p>
+<p>一个<code>SqlSession</code> 它代表了与数据库的一次会话，用于管理 SQL 的执行。</p>
+<h1 id="mybatis的运行原理"><a href="#mybatis的运行原理" class="headerlink" title="mybatis的运行原理"></a>mybatis的运行原理</h1><ul>
+<li>MyBatis 首先会加载全局配置文件和 Mapper 文件，解析并加载数据库配置信息、环境信息、映射关系等，然后MyBatis会根据配置创建一个<code>SqlSessionFactory</code>对象 然后通过SqlSessionFactory.openSession()创建<code>SqlSession</code>对象，有了<code>SqlSession</code>对象，我们可以执行Mapper方法或直接执行SQL语句。如果在 Mapper 的配置文件 中配置了动态 SQL，MyBatis首先解析动态SQL，生成最终的SQL语句，并且MyBatis 会通过<code>ParameterHandler</code>绑定参数。然后通过MyBatis的执行器 查询缓存并执行SQL，在SQL执行完成并获取到数据库结果集后，MyBatis会通过ResultSetHandler将结果集映射为相应的实体对象。如果使用了事务<code>SqlSession</code> 提供 <code>commit()</code> 和 <code>rollback()</code> 方法来提交或回滚事务，在使用完 <code>SqlSession</code> 后，调用 <code>close()</code> 方法关闭 <code>SqlSession</code> ，释放资源。</li>
+</ul>
+<h1 id="sql-语句where和having的区别"><a href="#sql-语句where和having的区别" class="headerlink" title="sql 语句where和having的区别"></a>sql 语句where和having的区别</h1><p>**<code>having</code> vs <code>where</code>**：</p>
+<ul>
+<li><code>where</code>：过滤指定的行，不能在where字句中使用聚合函数（分组函数）<code>where</code> 在<code>group by</code> 前。</li>
+<li><code>having</code>：过滤已经分组后的结果，一般都是和 <code>group by</code> 连用，不能单独使用。<code>having</code> 在 <code>group by</code> 之后。</li>
+<li>因为<code>WHERE</code> 是基于每一行的条件来筛选数据的它的作用范围仅限于每个单独的行。聚合函数是对多行数据进行汇总计算，计算出的是整租数据而不是单独的行</li>
+</ul>
+<h1 id="ON和WHERE-的区别"><a href="#ON和WHERE-的区别" class="headerlink" title="ON和WHERE 的区别"></a>ON<code>和</code>WHERE 的区别</h1><p>连接表时，SQL 会根据连接条件生成一张新的临时表。<code>ON</code> 就是连接条件，它决定临时表的生成。</p>
+<p><code>WHERE</code> 是在临时表生成以后，再对临时表中的数据进行过滤，生成最终的结果集</p>
+<h1 id="sql语句的连接有哪些有什么区别"><a href="#sql语句的连接有哪些有什么区别" class="headerlink" title="sql语句的连接有哪些有什么区别"></a>sql语句的连接有哪些有什么区别</h1><table>
+<thead>
+<tr>
+<th align="center">连接类型</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">INNER JOIN 内连接</td>
+<td align="center">（默认连接方式）只有当两个表都存在满足条件的记录时才会返回行。</td>
+</tr>
+<tr>
+<td align="center">LEFT JOIN &#x2F; LEFT OUTER JOIN 左(外)连接</td>
+<td align="center">返回左表中的所有行，即使右表中没有满足条件的行也是如此。</td>
+</tr>
+<tr>
+<td align="center">RIGHT JOIN &#x2F; RIGHT OUTER JOIN 右(外)连接</td>
+<td align="center">返回右表中的所有行，即使左表中没有满足条件的行也是如此。</td>
+</tr>
+<tr>
+<td align="center">FULL JOIN &#x2F; FULL OUTER JOIN 全(外)连接</td>
+<td align="center">只要其中有一个表存在满足条件的记录，就返回行。</td>
+</tr>
+<tr>
+<td align="center">SELF JOIN</td>
+<td align="center">将一个表连接到自身，就像该表是两个表一样。为了区分两个表，在 SQL 语句中需要至少重命名一个表。</td>
+</tr>
+<tr>
+<td align="center">CROSS JOIN</td>
+<td align="center">交叉连接，从两个或者多个连接表中返回记录集的笛卡尔积</td>
+</tr>
+</tbody></table>
+<h1 id="如何创建唯一索引"><a href="#如何创建唯一索引" class="headerlink" title="如何创建唯一索引"></a>如何创建唯一索引</h1><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">unique</span> index tb_index <span class="keyword">on</span> tb(列)</span><br></pre></td></tr></table></figure>
+
+<p>添加索引</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">table</span> <span class="keyword">user</span> <span class="keyword">ADD</span> INDEX user_index(id)</span><br></pre></td></tr></table></figure>
+
+<h1 id="项目"><a href="#项目" class="headerlink" title="项目"></a>项目</h1><h1 id="在项目开发过程中，你有遇到过哪些运行时异常，怎么排查解决的"><a href="#在项目开发过程中，你有遇到过哪些运行时异常，怎么排查解决的" class="headerlink" title="在项目开发过程中，你有遇到过哪些运行时异常，怎么排查解决的"></a>在项目开发过程中，你有遇到过哪些运行时异常，怎么排查解决的</h1><p>参数错误异常</p>
+<p>其他一些更多是功能流程实现细节上，如项目中的规则树节点判断流程问题，抛出一些自定义的异常。</p>
+<h1 id="看到你的项目用到了-DDD，这也是我们很感兴趣的技术点，你可以介绍下你在使用-DDD-做这个项目时，都运用了-DDD-哪些知识。"><a href="#看到你的项目用到了-DDD，这也是我们很感兴趣的技术点，你可以介绍下你在使用-DDD-做这个项目时，都运用了-DDD-哪些知识。" class="headerlink" title="看到你的项目用到了 DDD，这也是我们很感兴趣的技术点，你可以介绍下你在使用 DDD 做这个项目时，都运用了 DDD 哪些知识。"></a>看到你的项目用到了 DDD，这也是我们很感兴趣的技术点，你可以介绍下你在使用 DDD 做这个项目时，都运用了 DDD 哪些知识。</h1><p>DDD 是一种软件设计方法， 他的很多规范约定，都是为了提高工程交付质量。它所有的手段，都是希望以一个功能逻辑的实现为聚合，将功能所需的对象、接口、逻辑，按照领域划分到自己的领域内。</p>
+<p>就像在这个项目中，抽奖中的策略，就是一个独立的领域模型。在这个领域中需要提供策略的装载、随机数算法计算、抽奖模板调用功能，这样一个领域就像划分好的一个独立个体，它拥有属于它的对象信息，当需要使用数据库资源、缓存资源，以及外部接口资源的时候，都通过依赖倒置进行调用。这个领域不做其他模块的引入只负责业务功能实现，所需的所有数据，则有外部接口通过依赖倒置提供。</p>
+<p>1、上层模块不应该依赖底层模块，它们都应该依赖于抽象。<br>2、抽象不应该依赖于细节，细节应该依赖于抽象。</p>
+<h1 id="你的抽奖流程中，哪些被定义为值对象，哪些被定义为实体对象"><a href="#你的抽奖流程中，哪些被定义为值对象，哪些被定义为实体对象" class="headerlink" title="你的抽奖流程中，哪些被定义为值对象，哪些被定义为实体对象"></a>你的抽奖流程中，哪些被定义为值对象，哪些被定义为实体对象</h1><p>在 DDD 的规范定义中，值对象通常用于描述对象属性的值，不具备唯一ID，不影响数据变化。如；数据库中字段的枚举值、业务流程中属性对象。如抽奖流程中 规则树值对象。</p>
+<p>实体对象，则具备唯一ID，会影响到写库动作，抽奖发起实体、奖品信息实体对象</p>
+<h1 id="关于访问数据层的依赖倒置，是怎么使用的，有什么好处，你可以描述下吗"><a href="#关于访问数据层的依赖倒置，是怎么使用的，有什么好处，你可以描述下吗" class="headerlink" title="关于访问数据层的依赖倒置，是怎么使用的，有什么好处，你可以描述下吗"></a>关于访问数据层的依赖倒置，是怎么使用的，有什么好处，你可以描述下吗</h1><p> DDD 的分层结构，是以 domain 领域实现为核心，一个 domain 领域下所需的外部服务，都由领域层定义接口，让基础层做具体实现。而数据库持久化操作，定义的 PO 对象，就被这样的方式被限定在基础层了，外部是没法引入使用的，防止了数据库持久化对象进入业务中。</p>
+<h1 id="把抽奖划分为抽奖前、中、后，三个动作。请具体结合场景讲解下，为什么这样设计"><a href="#把抽奖划分为抽奖前、中、后，三个动作。请具体结合场景讲解下，为什么这样设计" class="headerlink" title="把抽奖划分为抽奖前、中、后，三个动作。请具体结合场景讲解下，为什么这样设计"></a>把抽奖划分为抽奖前、中、后，三个动作。请具体结合场景讲解下，为什么这样设计</h1><p>这个的设计得益于在 Spring&#x2F;MyBatis 框架源码的学习，在源码中经常会出现对一个流程进行拆分解耦，如 Spring 是 Bean 对象的拆解，MyBatis 是会话流程的拆解。所以在设计大营销的抽奖模块时，对于需求中的各类功能点；黑名单抽奖、权重抽奖、默认抽奖、抽奖N次解锁、兜底抽奖等等情况，是可以拆解为抽奖前、中、后，3个行为动作的，基于这样的考虑后，设计出非常容易扩展的松耦合结构</p>
+<h1 id="是什么场景下使用了责任链模式，什么场景使用组合模式，为什么？"><a href="#是什么场景下使用了责任链模式，什么场景使用组合模式，为什么？" class="headerlink" title="是什么场景下使用了责任链模式，什么场景使用组合模式，为什么？"></a>是什么场景下使用了责任链模式，什么场景使用组合模式，为什么？</h1><p>模板模式定义了一套标准的抽奖流程 比如进行参数校验、执行责任链 通过规则树进行一个抽奖最终返回抽奖结果，这样的话整个抽奖流程就会很清晰，方便后续的功能迭代，</p>
+<p>在设计完抽奖前、中、后，松耦合的结构模型后，对于抽奖前要执行哪种抽奖，但单向选择问题。所以这里使用了责任链模式，进行节点流程判断， 他在执行的时候就会判断是否需要黑名单过滤，没有就走下一个，继续判断你一共消耗了多少积</p>
+<p>，如果积分值消耗达到了他的标准就会走权重范围抽奖的一个处理吗，在权重范围抽奖中定义了一些必中的奖品，在对应的库表里有个权重字段，如果前两个都不符合。就有个兜底策略，直接普通抽奖 所以使用责任链更为合适。</p>
+<p>之后是进入抽奖的中和后，这两部的流程是相对复杂的，需要判断用户抽奖了几次，对于不同的抽奖会限定是否能获得某个奖品，同时还有库存的扣减，如果库存不足或者不满足n次抽奖得到某个奖品，则会进行兜底。那么这就是一个树规则的交叉流程，所以会使用了组合模式构建一颗规则树，并通过数据库表的动态配置决定在抽奖前完成后，后续的流程要如何进行</p>
+<p>工厂的 有些地方我们需要注入，为了避免获取的时候写过多的if else呢 把每一个这样实现的节点配置一个Component()的注解指定他的名字 将这个节点通过map的方式注入到工厂，注入的时候他会拿到你对应配置的名字和创建出来的对象关联写到map里</p>
+<h1 id="抽奖也是一种瞬时峰值很高的业务场景，那么对于抽中奖品后的库存扣减是怎么做的？"><a href="#抽奖也是一种瞬时峰值很高的业务场景，那么对于抽中奖品后的库存扣减是怎么做的？" class="headerlink" title="抽奖也是一种瞬时峰值很高的业务场景，那么对于抽中奖品后的库存扣减是怎么做的？"></a>抽奖也是一种瞬时峰值很高的业务场景，那么对于抽中奖品后的库存扣减是怎么做的？</h1><p>关于库存的扣减，是一个非常重要的流程。尤其是这种单独资源竞争的场景，如果设计的不好，很容易把服务打挂</p>
+<p>所以在这套系统设计中，为了避免库存扣减直接更新库表的行级锁，而导致大量的用户进行等待状态。所以把数据库表的库存同步到 Redis 缓存中，在通过 incr 扣减的方式进行消费，同时保证不超卖，而对每一条产生从 incr 值，与抽奖的策略ID组合一个key，进行 setnx 加锁兜底，来保证不超卖。</p>
+<h1 id="那么最终同步库是怎么做的，怎么降低对数据库的压力的？"><a href="#那么最终同步库是怎么做的，怎么降低对数据库的压力的？" class="headerlink" title="那么最终同步库是怎么做的，怎么降低对数据库的压力的？"></a>那么最终同步库是怎么做的，怎么降低对数据库的压力的？</h1><p>保持最终一致性的设计在执行完库存的扣减操作后，发送一个扣减到消息队列，之后通过定时任务来消费队列。通过控制执行频率，降低对数据库的压力</p>
+<h1 id="项目中你提到了可以支持不同场景的抽奖诉求，比如；多少积分后可以抽奖一个固定范围的奖品，或者抽奖n次后，才可以中奖某个奖品。这部分你是怎么做的？库表怎么设计的？"><a href="#项目中你提到了可以支持不同场景的抽奖诉求，比如；多少积分后可以抽奖一个固定范围的奖品，或者抽奖n次后，才可以中奖某个奖品。这部分你是怎么做的？库表怎么设计的？" class="headerlink" title="项目中你提到了可以支持不同场景的抽奖诉求，比如；多少积分后可以抽奖一个固定范围的奖品，或者抽奖n次后，才可以中奖某个奖品。这部分你是怎么做的？库表怎么设计的？"></a>项目中你提到了可以支持不同场景的抽奖诉求，比如；多少积分后可以抽奖一个固定范围的奖品，或者抽奖n次后，才可以中奖某个奖品。这部分你是怎么做的？库表怎么设计的？</h1><p>这块的流程，就是前面关于大营销抽奖领域模型的设计，从而确定的库表设计。也就是常说的领域-&gt;驱动设计。</p>
+<p>库表包括；策略表、策略明细（库存、概率、规则key）、奖品表、规则表、规则树（3个表）</p>
+<h1 id="18-抽奖奖品库存如何处理，怎么保证最终一致性？"><a href="#18-抽奖奖品库存如何处理，怎么保证最终一致性？" class="headerlink" title="18. 抽奖奖品库存如何处理，怎么保证最终一致性？"></a>18. 抽奖奖品库存如何处理，怎么保证最终一致性？</h1><p>这里需要3个步骤，首先是每次扣减完库存，都会写入到 Redis 延迟队列 &#x2F; MQ 延迟消息，缓慢更新数据库库存。之后是 Redis 内的预热库存消耗完毕后，发送最终 MQ 消息，更新数据库的剩余库存为 0，最终活动结束后，还有任务补偿，扫描抽奖所产生的的参与记录单，更新最终的库存消耗。</p>
+<h1 id="生产者可能多次发送同一个MQ，怎么保证奖品不会超发？"><a href="#生产者可能多次发送同一个MQ，怎么保证奖品不会超发？" class="headerlink" title=". 生产者可能多次发送同一个MQ，怎么保证奖品不会超发？"></a>. 生产者可能多次发送同一个MQ，怎么保证奖品不会超发？</h1><p>MQ 的消息是必须含带具有唯一标识的业务ID的。消费者，通过唯一ID业务，更新或者写库的时候可以保证幂等性。如果消息被重复消费，数据库也会拒绝重复的写入操作。这样也就不会产生超发的可能。</p>
+<h3 id="抽奖算法如何提供O-1-时间复杂度，提高抽奖效率？"><a href="#抽奖算法如何提供O-1-时间复杂度，提高抽奖效率？" class="headerlink" title="抽奖算法如何提供O(1)时间复杂度，提高抽奖效率？"></a>抽奖算法如何提供O(1)时间复杂度，提高抽奖效率？</h3><p>在活动开始前会从数据库中获取到N个奖品的抽奖概率，将概率转换为对应的整数数量，写入到缓存中。那么在抽奖的时候就按照整数数量生成随机数来抽奖。这样用空间换时间的效率是非常高的。在项目中使用rabbitmq 消费者在拿到消息的同时 系统宕机了，怎么办</p>
+<h1 id="在项目中使用rabbitmq-消费者在拿到消息的同时-系统宕机了，怎么办"><a href="#在项目中使用rabbitmq-消费者在拿到消息的同时-系统宕机了，怎么办" class="headerlink" title="在项目中使用rabbitmq 消费者在拿到消息的同时 系统宕机了，怎么办"></a>在项目中使用rabbitmq 消费者在拿到消息的同时 系统宕机了，怎么办</h1><p><strong>消息确认机制</strong>：RabbitMQ 提供了消费者确认机制（Acknowledgement）。消费者在成功处理完消息后发送确认，RabbitMQ 才会将消息标记为已处理并从队列中删除。如果消费者还没发送确认就宕机，消息会被重新投入队列，由其他消费者或恢复后的消费者重新消费。这种机制确保了消息不会丢失。</p>
+<p><strong>将消息持久化</strong>：确保队列和消息都设置为持久化（durable 和 persistent），这样即使 RabbitMQ 或系统本身崩溃，未处理的消息也会保留在队列中，不会丢失。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">channel.basicConsume(queueName, <span class="literal">false</span>, <span class="keyword">new</span> <span class="title class_">DefaultConsumer</span>(channel) &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">handleDelivery</span><span class="params">(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, <span class="type">byte</span>[] body)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">// 处理消息</span></span><br><span class="line">            processMessage(body);</span><br><span class="line">            <span class="comment">// 处理成功，手动确认消息</span></span><br><span class="line">            channel.basicAck(envelope.getDeliveryTag(), <span class="literal">false</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            <span class="comment">// 处理失败，拒绝消息或不确认</span></span><br><span class="line">            channel.basicNack(envelope.getDeliveryTag(), <span class="literal">false</span>, <span class="literal">true</span>); <span class="comment">// 重回队列</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment">#在配置application.yaml文件中配置</span></span><br><span class="line">  <span class="attr">listener:</span></span><br><span class="line">  <span class="attr">simple:</span></span><br><span class="line">    <span class="attr">acknowledge-mode:</span> <span class="string">manual</span></span><br></pre></td></tr></table></figure>
+
+<p>方法中传入 <code>Channel</code> 和 <code>deliveryTag</code> 参数</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.amqp.rabbit.annotation.RabbitListener;</span><br><span class="line"><span class="keyword">import</span> org.springframework.amqp.rabbit.annotation.QueueBinding;</span><br><span class="line"><span class="keyword">import</span> org.springframework.amqp.rabbit.annotation.Queue;</span><br><span class="line"><span class="keyword">import</span> org.springframework.amqp.rabbit.annotation.Exchange;</span><br><span class="line"><span class="keyword">import</span> org.springframework.amqp.core.ExchangeTypes;</span><br><span class="line"><span class="keyword">import</span> org.springframework.amqp.support.AmqpHeaders;</span><br><span class="line"><span class="keyword">import</span> org.springframework.messaging.handler.annotation.Header;</span><br><span class="line"><span class="keyword">import</span> com.rabbitmq.client.Channel;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">RabbitMQConsumer</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RabbitListener(bindings = @QueueBinding(</span></span><br><span class="line"><span class="meta">            value = @Queue(name=&quot;fresh.queue&quot;, durable = &quot;true&quot;), // 设置队列持久化</span></span><br><span class="line"><span class="meta">            exchange = @Exchange(name = &quot;fresh.direct&quot;, type = ExchangeTypes.DIRECT),</span></span><br><span class="line"><span class="meta">            key = &#123;&quot;addMAndC&quot;&#125;</span></span><br><span class="line"><span class="meta">    ))</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addMemberQiangCoupon</span><span class="params">(Map&lt;String, Object&gt; msg, Channel channel, <span class="meta">@Header(AmqpHeaders.DELIVERY_TAG)</span> <span class="type">long</span> deliveryTag)</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">uid</span> <span class="operator">=</span> String.valueOf(msg.get(<span class="string">&quot;uid&quot;</span>));</span><br><span class="line">        <span class="type">String</span> <span class="variable">cid</span> <span class="operator">=</span> String.valueOf(msg.get(<span class="string">&quot;cid&quot;</span>));</span><br><span class="line">        <span class="type">MemberQiangCoupon</span> <span class="variable">memberQiangCoupon</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">MemberQiangCoupon</span>(Integer.parseInt(uid), Integer.parseInt(cid), <span class="number">1</span>, <span class="literal">null</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">// 插入数据库操作</span></span><br><span class="line">            <span class="built_in">this</span>.memberQiangCouponMapper.insert(memberQiangCoupon);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 手动确认消息已成功处理</span></span><br><span class="line">            channel.basicAck(deliveryTag, <span class="literal">false</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="comment">// 处理失败，拒绝消息并重新入队</span></span><br><span class="line">                channel.basicNack(deliveryTag, <span class="literal">false</span>, <span class="literal">true</span>);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (Exception ex) &#123;</span><br><span class="line">                System.err.println(<span class="string">&quot;消息NACK失败: &quot;</span> + ex.getMessage());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>通过注解 <code>@Header(AmqpHeaders.DELIVERY_TAG)</code> 可以将 <code>deliveryTag</code> 注入方法中</li>
+<li><code>Channel</code> 是 RabbitMQ 客户端和 RabbitMQ 服务器之间的一个通信通道，代表一个会话。所有的消息发送和接收操作都是通过 <code>Channel</code> 完成的</li>
+<li><code>deliveryTag</code>  RabbitMQ 在消息传递过程中自动生成并维护的一个唯一标识，用来标记每条消息在消费者端的唯一位置。以便在确认或拒绝时引用该消息。</li>
+</ul>
+<h1 id="为什么自研路由组件"><a href="#为什么自研路由组件" class="headerlink" title="为什么自研路由组件"></a>为什么自研路由组件</h1><p>如果面试问：“为什么要自研，市面不是有吗，怎么回答？” 可以从以下3个点解答；</p>
+<ol>
+<li>维护性；市面的路由组件比如 shardingsphere 但过于庞大，还需要随着版本做一些升级。而我们需要更少的维护成本。</li>
+<li>扩展性；结合自身的业务需求，我们的路由组件可以分库分表、自定义路由协议，扫描指定库表数据等各类方式。研发扩展性好，简单易用。</li>
+<li>安全性；自研的组件更好的控制了安全问题，不会因为一些额外引入的jar包，造成安全风险。</li>
+</ol>
+<p>当然，我们的组件主要是为了更好的适应目前系统的诉求，所以使用自研的方式处理。就像shardingsphere 的市场占有率也不是 100% 那么肯定还有很多公司在自研，甚至各个大厂也都自研一整套分布式服务，来让自己的系统更稳定的运行。分库分表基本是单表200万，才分。那么面试怎么说；</p>
+<p>你们为什么分库分表？</p>
+<ol>
+<li>我们分库分表用的非常熟。但不能为了等到系统到了200万数据，才拆。那么工作量会非常大</li>
+<li>我们的做法是，因为有成熟方案，所以前期就分库分表了。但，为了解释服务器空间。所以把分库分表的库，用服务器虚拟出来机器安装。这样即不过多的占用服务器资源，也方便后续数据量真的上来了，好拆分。</li>
+<li>同时，抽奖系统，是瞬时峰值较高的系统，历史数据不一定多。所以我们希望，用户可以快速的检索到个人数据，做最优响应。因为大家都知道，抽奖这东西，push发完，基本就1~3分钟结束，10分钟人都没了。所以我们这也是做了分库分表的理由</li>
+</ol>
+<h1 id="4-秒杀的滑块锁讲解"><a href="#4-秒杀的滑块锁讲解" class="headerlink" title="4. 秒杀的滑块锁讲解"></a>4. 秒杀的滑块锁讲解</h1><ol>
+<li>是针对于用户参与的活动库存加锁的，如果是独占锁是针对于活动ID加锁的。</li>
+<li>滑块锁的核心是去竞态，避免独占影响系统的响应性能。关于此类锁，这里又做了视频做了详细的讲解；<a target="_blank" rel="noopener" href="https://bugstack.cn/md/road-map/redis.html">Redis | bugstack 虫洞栈 (opens new window)</a>- 如图。别看提秒杀一堆人说，但如果还讲用独占锁做活动的秒杀场景，就没做过大规模的秒杀。独占是会很大概率出事故的。</li>
+<li>那为什么加一个锁呢，incr 不就可以。加锁是兜底，你不知道什么时候会出现 incr 不对的情况。如；集群配置问题【特例】、出现redis问题，需要恢复库存。如果没有锁，可能会超卖。<a target="_blank" rel="noopener" href="https://t.zsxq.com/12sNS4E2J">https://t.zsxq.com/12sNS4E2J (opens new window)</a>- 第一条评论加了说明。</li>
+<li>对于非交易的活动类场景，要的就是一个快。快速响应、快速释放，可接受容错失败概率。但不要磨磨唧唧影响我的主核心交易链路。但凡在618、双11，营销敢超时，就直接下掉。保证用户可下单可支付。否则这黄金时间点，你耽误1分钟都是几个亿的成交额。所以，这类营销秒杀场景下，根本就是保证不超卖，也不恢复库存。</li>
+</ol>
+<p>注意：独占锁是加给个人流程的 - 无资源竞争，如贷款单受理。分段&#x2F;滑块&#x2F;无锁化，是加给库存的 - 有资源竞争，如秒杀、商品发货等集中资源类。就跟大超时的收银台一样。原来就1个出口，后来一排出口，在后来又有无人化的电子出口。点点那个软件。</p>
+<p>举例；incr 的速度很快，就像进入了公共的卫生间🚾。一个坑一个门，谁进去谁就锁上。没有就跑到下一个门。你说你不锁门吧，也没问题。但别人不知道，一拽开就比较尴尬。所以要加锁，锁门。</p>
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/ChestnutDuck/StudyRepository.github.io.git/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/ChestnutDuck/StudyRepository.github.io.git/img/touxiang.jpg" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/ChestnutDuck/StudyRepository.github.io.git/img/touxiang.jpg" title="头像" alt="头像"></a><div class="post-copyright__author_name">Duckkkkk</div><div class="post-copyright__author_desc">记录每天平凡的自己</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="https://github.com/ChestnutDuck/StudyRepository.github.io.git/posts/0.html">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('https://github.com/ChestnutDuck/StudyRepository.github.io.git/posts/0.html')">Duckkkkk·博客</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"><div class="post-reward" onclick="anzhiyu.addRewardMask()"><div class="reward-button button--animated" title="赞赏作者"><i class="anzhiyufont anzhiyu-icon-hand-heart-fill"></i>打赏作者</div><div class="reward-main"><div class="reward-all"><span class="reward-title">感谢你赐予我前进的力量</span><ul class="reward-group"><li class="reward-item"><a href="/ChestnutDuck/StudyRepository.github.io.git/img/wechat.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/ChestnutDuck/StudyRepository.github.io.git/img/wechat.jpg" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="/ChestnutDuck/StudyRepository.github.io.git/img/alipay.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/ChestnutDuck/StudyRepository.github.io.git/img/alipay.jpg" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul><a class="reward-main-btn" href="/about/#about-reward" target="_blank"><div class="reward-text">赞赏者名单</div><div class="reward-dec">因为你们的支持让我意识到写文章的价值🙏</div></a></div></div></div><div id="quit-box" onclick="anzhiyu.removeRewardMask()" style="display: none"></div></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="https://github.com/ChestnutDuck/StudyRepository.github.io.git/posts/0.html"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=Duckkkkk·博客&amp;url=https://github.com/ChestnutDuck/StudyRepository.github.io.git/posts/0.html&amp;pic=" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://github.com/ChestnutDuck/StudyRepository.github.io.git" target="_blank">Duckkkkk·博客</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"></div></div></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/ChestnutDuck/StudyRepository.github.io.git/posts/e8d530fd.html"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/ChestnutDuck/StudyRepository.github.io.git/images/14.png" onerror="onerror=null;src='/ChestnutDuck/StudyRepository.github.io.git/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">葵花宝典</div></div></a></div><div class="next-post pull-right"><a href="/ChestnutDuck/StudyRepository.github.io.git/posts/0.html"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/ChestnutDuck/StudyRepository.github.io.git/" onerror="onerror=null;src='/ChestnutDuck/StudyRepository.github.io.git/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info"></div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info__sayhi" id="author-info__sayhi" onclick="anzhiyu.changeSayHelloText()"></div><div class="author-info-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/ChestnutDuck/StudyRepository.github.io.git/img/touxiang.jpg" onerror="this.onerror=null;this.src='/ChestnutDuck/StudyRepository.github.io.git/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__description">世界万般美好</div><div class="author-info__bottom-group"><a class="author-info__bottom-group-left" href="/ChestnutDuck/StudyRepository.github.io.git/"><h1 class="author-info__name">Duckkkkk</h1><div class="author-info__desc">记录每天平凡的自己</div></a><div class="card-info-social-icons is-center"><a class="social-icon faa-parent animated-hover" href="https://github.com/ChestnutDuck" target="_blank" title="Github"><i class="anzhiyufont anzhiyu-icon-github"></i></a></div></div></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bullhorn anzhiyu-shake"></i><span>公告</span></div><div class="announcement_content">欢迎光临我的博客</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Bean%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="toc-number">1.</span> <span class="toc-text">Bean的生命周期</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#SpringBoot%E7%9A%84%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B"><span class="toc-number">2.</span> <span class="toc-text">SpringBoot的启动流程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFSpringBoot"><span class="toc-number">3.</span> <span class="toc-text">什么是SpringBoot</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Spring-Boot-%E7%9A%84%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E5%8F%AF%E4%BB%A5%E6%A6%82%E6%8B%AC%E4%B8%BA%E4%BB%A5%E4%B8%8B%E5%87%A0%E7%82%B9"><span class="toc-number">4.</span> <span class="toc-text">Spring Boot 的核心特性可以概括为以下几点</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Spring-Boot-%E6%94%AF%E6%8C%81%E5%A4%9A%E7%A7%8D%E5%86%85%E5%B5%8C%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-number">5.</span> <span class="toc-text">Spring Boot 支持多种内嵌服务器</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Spring-Boot-%E4%B8%AD-application-properties-%E5%92%8C-application-yml-%E7%9A%84%E5%8C%BA%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">6.</span> <span class="toc-text">Spring Boot 中 application.properties 和 application.yml 的区别是什么？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Spring-Boot-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E7%9A%84%E5%8A%A0%E8%BD%BD%E9%A1%BA%E5%BA%8F"><span class="toc-number">7.</span> <span class="toc-text">Spring Boot 配置文件的加载顺序</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Spring-Boot-%E6%89%93%E6%88%90%E7%9A%84-jar%E5%92%8C%E6%99%AE%E9%80%9A%E7%9A%84-jar-%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB"><span class="toc-number">8.</span> <span class="toc-text">Spring Boot 打成的 jar和普通的 jar 有什么区别</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3Spring-Boot%E4%B8%AD%E7%9A%84starter"><span class="toc-number">9.</span> <span class="toc-text">如何理解Spring Boot中的starter</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#SpringBoot%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%E8%B7%A8%E5%9F%9F%E8%AF%B7%E6%B1%82"><span class="toc-number">10.</span> <span class="toc-text">SpringBoot如何处理跨域请求</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#SpringBoot%E6%8B%A6%E6%88%AA%E5%99%A8%E6%98%AF%E4%BB%80-%E4%B9%88%EF%BC%9F%E6%9C%89%E6%B2%A1%E6%9C%89%E5%9C%A8%E7%A8%8B%E5%BA%8F%E4%B8%AD%E4%BD%BF%E7%94%A8%E8%BF%87"><span class="toc-number">11.</span> <span class="toc-text">SpringBoot拦截器是什 么？有没有在程序中使用过</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#SpringBoot-%E4%B8%AD%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1"><span class="toc-number">12.</span> <span class="toc-text">SpringBoot 中如何实现定时任务 ?</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AF%B9-Spring-Boot-%E4%BA%8B%E4%BB%B6%E6%9C%BA%E5%88%B6%E7%9A%84%E4%BA%86%E8%A7%A3"><span class="toc-number">13.</span> <span class="toc-text">对 Spring Boot 事件机制的了解</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Spring-Boot-%E4%B8%AD%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%BC%82%E6%AD%A5%E5%A4%84%E7%90%86%EF%BC%9F"><span class="toc-number">14.</span> <span class="toc-text">Spring Boot 中如何实现异步处理？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%92%8C-%E7%9A%84%E5%8C%BA%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-number">15.</span> <span class="toc-text">#{} 和 ${} 的区别是什么</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#MyBatis-%E6%98%AF%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E5%88%86%E9%A1%B5%E7%9A%84%EF%BC%9F%E5%88%86%E9%A1%B5%E6%8F%92%E4%BB%B6%E7%9A%84%E5%8E%9F%E7%90%86%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-number">16.</span> <span class="toc-text">MyBatis 是如何进行分页的？分页插件的原理是什么</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AE%80%E8%BF%B0-MyBatis-%E7%9A%84%E6%8F%92%E4%BB%B6%E8%BF%90%E8%A1%8C%E5%8E%9F%E7%90%86%EF%BC%8C%E4%BB%A5%E5%8F%8A%E5%A6%82%E4%BD%95%E7%BC%96%E5%86%99%E4%B8%80%E4%B8%AA%E6%8F%92%E4%BB%B6"><span class="toc-number">17.</span> <span class="toc-text">简述 MyBatis 的插件运行原理，以及如何编写一个插件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#MyBatis-%E5%8A%A8%E6%80%81-sql-%E6%98%AF%E5%81%9A%E4%BB%80%E4%B9%88%E7%9A%84%EF%BC%9F%E9%83%BD%E6%9C%89%E5%93%AA%E4%BA%9B%E5%8A%A8%E6%80%81-sql%EF%BC%9F%E8%83%BD%E7%AE%80%E8%BF%B0%E4%B8%80%E4%B8%8B%E5%8A%A8%E6%80%81-sql-%E7%9A%84%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86%E4%B8%8D%EF%BC%9F"><span class="toc-number">18.</span> <span class="toc-text">MyBatis 动态 sql 是做什么的？都有哪些动态 sql？能简述一下动态 sql 的执行原理不？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#MyBatis-%E6%89%A7%E8%A1%8C%E6%89%B9%E9%87%8F%E6%8F%92%E5%85%A5%EF%BC%8C%E8%83%BD%E8%BF%94%E5%9B%9E%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%BB%E9%94%AE%E5%88%97%E8%A1%A8%E5%90%97%EF%BC%9F"><span class="toc-number">19.</span> <span class="toc-text">MyBatis 执行批量插入，能返回数据库主键列表吗？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#MyBatis-%E6%98%AF%E5%A6%82%E4%BD%95%E5%B0%86-sql-%E6%89%A7%E8%A1%8C%E7%BB%93%E6%9E%9C%E5%B0%81%E8%A3%85%E4%B8%BA%E7%9B%AE%E6%A0%87%E5%AF%B9%E8%B1%A1%E5%B9%B6%E8%BF%94%E5%9B%9E%E7%9A%84"><span class="toc-number">20.</span> <span class="toc-text">MyBatis 是如何将 sql 执行结果封装为目标对象并返回的</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#MyBatis-%E8%83%BD%E6%89%A7%E8%A1%8C%E4%B8%80%E5%AF%B9%E4%B8%80%E3%80%81%E4%B8%80%E5%AF%B9%E5%A4%9A%E7%9A%84%E5%85%B3%E8%81%94%E6%9F%A5%E8%AF%A2%E5%90%97%EF%BC%9F%E9%83%BD%E6%9C%89%E5%93%AA%E4%BA%9B%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F%EF%BC%8C%E4%BB%A5%E5%8F%8A%E5%AE%83%E4%BB%AC%E4%B9%8B%E9%97%B4%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">21.</span> <span class="toc-text">MyBatis 能执行一对一、一对多的关联查询吗？都有哪些实现方式，以及它们之间的区别</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#join-%E6%9F%A5%E8%AF%A2%E5%87%BA%E6%9D%A5-100-%E6%9D%A1%E8%AE%B0%E5%BD%95%EF%BC%8C%E5%A6%82%E4%BD%95%E7%A1%AE%E5%AE%9A%E4%B8%BB%E5%AF%B9%E8%B1%A1%E6%98%AF-5-%E4%B8%AA%EF%BC%8C%E8%80%8C%E4%B8%8D%E6%98%AF-100-%E4%B8%AA%EF%BC%9F"><span class="toc-number">21.1.</span> <span class="toc-text">join 查询出来 100 条记录，如何确定主对象是 5 个，而不是 100 个？</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#MyBatis%E5%BB%B6%E8%BF%9F%E5%8A%A0%E8%BD%BD%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">22.</span> <span class="toc-text">MyBatis延迟加载的实现原理是什么？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#MyBatis-%E7%9A%84-xml-%E6%98%A0%E5%B0%84%E6%96%87%E4%BB%B6%E4%B8%AD%EF%BC%8C%E4%B8%8D%E5%90%8C%E7%9A%84-xml-%E6%98%A0%E5%B0%84%E6%96%87%E4%BB%B6%EF%BC%8Cid-%E6%98%AF%E5%90%A6%E5%8F%AF%E4%BB%A5%E9%87%8D%E5%A4%8D%EF%BC%9F"><span class="toc-number">23.</span> <span class="toc-text">MyBatis 的 xml 映射文件中，不同的 xml 映射文件，id 是否可以重复？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#MyBatis-%E4%B8%AD%E5%A6%82%E4%BD%95%E6%89%A7%E8%A1%8C%E6%89%B9%E5%A4%84%E7%90%86"><span class="toc-number">24.</span> <span class="toc-text">MyBatis 中如何执行批处理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#MyBatis-%E9%83%BD%E6%9C%89%E5%93%AA%E4%BA%9B-Executor-%E6%89%A7%E8%A1%8C%E5%99%A8%EF%BC%9F%E5%AE%83%E4%BB%AC%E4%B9%8B%E9%97%B4%E7%9A%84%E5%8C%BA%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-number">25.</span> <span class="toc-text">MyBatis 都有哪些 Executor 执行器？它们之间的区别是什么</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#MyBatis-%E4%B8%AD%E5%A6%82%E4%BD%95%E6%8C%87%E5%AE%9A%E4%BD%BF%E7%94%A8%E5%93%AA%E4%B8%80%E7%A7%8D-Executor-%E6%89%A7%E8%A1%8C%E5%99%A8%EF%BC%9F"><span class="toc-number">26.</span> <span class="toc-text">MyBatis 中如何指定使用哪一种 Executor 执行器？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#MyBatis-%E6%98%A0%E5%B0%84%E6%96%87%E4%BB%B6%E4%B8%AD%EF%BC%8C%E5%A6%82%E6%9E%9C-A-%E6%A0%87%E7%AD%BE%E9%80%9A%E8%BF%87-include-%E5%BC%95%E7%94%A8%E4%BA%86-B-%E6%A0%87%E7%AD%BE%E7%9A%84%E5%86%85%E5%AE%B9%EF%BC%8C%E8%AF%B7%E9%97%AE%EF%BC%8CB-%E6%A0%87%E7%AD%BE%E8%83%BD%E5%90%A6%E5%AE%9A%E4%B9%89%E5%9C%A8-A-%E6%A0%87%E7%AD%BE%E7%9A%84%E5%90%8E%E9%9D%A2%EF%BC%8C%E8%BF%98%E6%98%AF%E8%AF%B4%E5%BF%85%E9%A1%BB%E5%AE%9A%E4%B9%89%E5%9C%A8-A-%E6%A0%87%E7%AD%BE%E7%9A%84%E5%89%8D%E9%9D%A2%EF%BC%9F"><span class="toc-number">27.</span> <span class="toc-text">MyBatis 映射文件中，如果 A 标签通过 include 引用了 B 标签的内容，请问，B 标签能否定义在 A 标签的后面，还是说必须定义在 A 标签的前面？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%AF%B4-MyBatis-%E6%98%AF%E5%8D%8A%E8%87%AA%E5%8A%A8-ORM-%E6%98%A0%E5%B0%84%E5%B7%A5%E5%85%B7%EF%BC%9F%E5%AE%83%E4%B8%8E%E5%85%A8%E8%87%AA%E5%8A%A8%E7%9A%84%E5%8C%BA%E5%88%AB%E5%9C%A8%E5%93%AA%E9%87%8C%EF%BC%9F"><span class="toc-number">28.</span> <span class="toc-text">为什么说 MyBatis 是半自动 ORM 映射工具？它与全自动的区别在哪里？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFSpringBoot%E7%9A%84%E8%87%AA%E5%8A%A8%E8%A3%85%E9%85%8D"><span class="toc-number">29.</span> <span class="toc-text">什么是SpringBoot的自动装配</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#SpringBoot%E8%87%AA%E5%8A%A8%E8%A3%85%E9%85%8D%E7%9A%84%E5%8E%9F%E7%90%86"><span class="toc-number">29.1.</span> <span class="toc-text">SpringBoot自动装配的原理</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Spring%E7%9A%84%E4%BA%8B%E5%8A%A1%E5%9C%A8%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E4%BC%9A%E5%A4%B1%E6%95%88"><span class="toc-number">30.</span> <span class="toc-text">Spring的事务在什么时候会失效</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Mybatis%E7%9A%84%E4%B8%80%E7%BA%A7%E7%BC%93%E5%AD%98%E5%92%8C%E4%BA%8C%E7%BA%A7%E7%BC%93%E5%AD%98"><span class="toc-number">31.</span> <span class="toc-text">Mybatis的一级缓存和二级缓存</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#mybatis%E7%9A%84%E8%BF%90%E8%A1%8C%E5%8E%9F%E7%90%86"><span class="toc-number">32.</span> <span class="toc-text">mybatis的运行原理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#sql-%E8%AF%AD%E5%8F%A5where%E5%92%8Chaving%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">33.</span> <span class="toc-text">sql 语句where和having的区别</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ON%E5%92%8CWHERE-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">34.</span> <span class="toc-text">ON和WHERE 的区别</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#sql%E8%AF%AD%E5%8F%A5%E7%9A%84%E8%BF%9E%E6%8E%A5%E6%9C%89%E5%93%AA%E4%BA%9B%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB"><span class="toc-number">35.</span> <span class="toc-text">sql语句的连接有哪些有什么区别</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%88%9B%E5%BB%BA%E5%94%AF%E4%B8%80%E7%B4%A2%E5%BC%95"><span class="toc-number">36.</span> <span class="toc-text">如何创建唯一索引</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE"><span class="toc-number">37.</span> <span class="toc-text">项目</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9C%A8%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E8%BF%87%E7%A8%8B%E4%B8%AD%EF%BC%8C%E4%BD%A0%E6%9C%89%E9%81%87%E5%88%B0%E8%BF%87%E5%93%AA%E4%BA%9B%E8%BF%90%E8%A1%8C%E6%97%B6%E5%BC%82%E5%B8%B8%EF%BC%8C%E6%80%8E%E4%B9%88%E6%8E%92%E6%9F%A5%E8%A7%A3%E5%86%B3%E7%9A%84"><span class="toc-number">38.</span> <span class="toc-text">在项目开发过程中，你有遇到过哪些运行时异常，怎么排查解决的</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%9C%8B%E5%88%B0%E4%BD%A0%E7%9A%84%E9%A1%B9%E7%9B%AE%E7%94%A8%E5%88%B0%E4%BA%86-DDD%EF%BC%8C%E8%BF%99%E4%B9%9F%E6%98%AF%E6%88%91%E4%BB%AC%E5%BE%88%E6%84%9F%E5%85%B4%E8%B6%A3%E7%9A%84%E6%8A%80%E6%9C%AF%E7%82%B9%EF%BC%8C%E4%BD%A0%E5%8F%AF%E4%BB%A5%E4%BB%8B%E7%BB%8D%E4%B8%8B%E4%BD%A0%E5%9C%A8%E4%BD%BF%E7%94%A8-DDD-%E5%81%9A%E8%BF%99%E4%B8%AA%E9%A1%B9%E7%9B%AE%E6%97%B6%EF%BC%8C%E9%83%BD%E8%BF%90%E7%94%A8%E4%BA%86-DDD-%E5%93%AA%E4%BA%9B%E7%9F%A5%E8%AF%86%E3%80%82"><span class="toc-number">39.</span> <span class="toc-text">看到你的项目用到了 DDD，这也是我们很感兴趣的技术点，你可以介绍下你在使用 DDD 做这个项目时，都运用了 DDD 哪些知识。</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%A0%E7%9A%84%E6%8A%BD%E5%A5%96%E6%B5%81%E7%A8%8B%E4%B8%AD%EF%BC%8C%E5%93%AA%E4%BA%9B%E8%A2%AB%E5%AE%9A%E4%B9%89%E4%B8%BA%E5%80%BC%E5%AF%B9%E8%B1%A1%EF%BC%8C%E5%93%AA%E4%BA%9B%E8%A2%AB%E5%AE%9A%E4%B9%89%E4%B8%BA%E5%AE%9E%E4%BD%93%E5%AF%B9%E8%B1%A1"><span class="toc-number">40.</span> <span class="toc-text">你的抽奖流程中，哪些被定义为值对象，哪些被定义为实体对象</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E%E8%AE%BF%E9%97%AE%E6%95%B0%E6%8D%AE%E5%B1%82%E7%9A%84%E4%BE%9D%E8%B5%96%E5%80%92%E7%BD%AE%EF%BC%8C%E6%98%AF%E6%80%8E%E4%B9%88%E4%BD%BF%E7%94%A8%E7%9A%84%EF%BC%8C%E6%9C%89%E4%BB%80%E4%B9%88%E5%A5%BD%E5%A4%84%EF%BC%8C%E4%BD%A0%E5%8F%AF%E4%BB%A5%E6%8F%8F%E8%BF%B0%E4%B8%8B%E5%90%97"><span class="toc-number">41.</span> <span class="toc-text">关于访问数据层的依赖倒置，是怎么使用的，有什么好处，你可以描述下吗</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8A%8A%E6%8A%BD%E5%A5%96%E5%88%92%E5%88%86%E4%B8%BA%E6%8A%BD%E5%A5%96%E5%89%8D%E3%80%81%E4%B8%AD%E3%80%81%E5%90%8E%EF%BC%8C%E4%B8%89%E4%B8%AA%E5%8A%A8%E4%BD%9C%E3%80%82%E8%AF%B7%E5%85%B7%E4%BD%93%E7%BB%93%E5%90%88%E5%9C%BA%E6%99%AF%E8%AE%B2%E8%A7%A3%E4%B8%8B%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E6%A0%B7%E8%AE%BE%E8%AE%A1"><span class="toc-number">42.</span> <span class="toc-text">把抽奖划分为抽奖前、中、后，三个动作。请具体结合场景讲解下，为什么这样设计</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%98%AF%E4%BB%80%E4%B9%88%E5%9C%BA%E6%99%AF%E4%B8%8B%E4%BD%BF%E7%94%A8%E4%BA%86%E8%B4%A3%E4%BB%BB%E9%93%BE%E6%A8%A1%E5%BC%8F%EF%BC%8C%E4%BB%80%E4%B9%88%E5%9C%BA%E6%99%AF%E4%BD%BF%E7%94%A8%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">43.</span> <span class="toc-text">是什么场景下使用了责任链模式，什么场景使用组合模式，为什么？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8A%BD%E5%A5%96%E4%B9%9F%E6%98%AF%E4%B8%80%E7%A7%8D%E7%9E%AC%E6%97%B6%E5%B3%B0%E5%80%BC%E5%BE%88%E9%AB%98%E7%9A%84%E4%B8%9A%E5%8A%A1%E5%9C%BA%E6%99%AF%EF%BC%8C%E9%82%A3%E4%B9%88%E5%AF%B9%E4%BA%8E%E6%8A%BD%E4%B8%AD%E5%A5%96%E5%93%81%E5%90%8E%E7%9A%84%E5%BA%93%E5%AD%98%E6%89%A3%E5%87%8F%E6%98%AF%E6%80%8E%E4%B9%88%E5%81%9A%E7%9A%84%EF%BC%9F"><span class="toc-number">44.</span> <span class="toc-text">抽奖也是一种瞬时峰值很高的业务场景，那么对于抽中奖品后的库存扣减是怎么做的？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%82%A3%E4%B9%88%E6%9C%80%E7%BB%88%E5%90%8C%E6%AD%A5%E5%BA%93%E6%98%AF%E6%80%8E%E4%B9%88%E5%81%9A%E7%9A%84%EF%BC%8C%E6%80%8E%E4%B9%88%E9%99%8D%E4%BD%8E%E5%AF%B9%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%8E%8B%E5%8A%9B%E7%9A%84%EF%BC%9F"><span class="toc-number">45.</span> <span class="toc-text">那么最终同步库是怎么做的，怎么降低对数据库的压力的？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E4%B8%AD%E4%BD%A0%E6%8F%90%E5%88%B0%E4%BA%86%E5%8F%AF%E4%BB%A5%E6%94%AF%E6%8C%81%E4%B8%8D%E5%90%8C%E5%9C%BA%E6%99%AF%E7%9A%84%E6%8A%BD%E5%A5%96%E8%AF%89%E6%B1%82%EF%BC%8C%E6%AF%94%E5%A6%82%EF%BC%9B%E5%A4%9A%E5%B0%91%E7%A7%AF%E5%88%86%E5%90%8E%E5%8F%AF%E4%BB%A5%E6%8A%BD%E5%A5%96%E4%B8%80%E4%B8%AA%E5%9B%BA%E5%AE%9A%E8%8C%83%E5%9B%B4%E7%9A%84%E5%A5%96%E5%93%81%EF%BC%8C%E6%88%96%E8%80%85%E6%8A%BD%E5%A5%96n%E6%AC%A1%E5%90%8E%EF%BC%8C%E6%89%8D%E5%8F%AF%E4%BB%A5%E4%B8%AD%E5%A5%96%E6%9F%90%E4%B8%AA%E5%A5%96%E5%93%81%E3%80%82%E8%BF%99%E9%83%A8%E5%88%86%E4%BD%A0%E6%98%AF%E6%80%8E%E4%B9%88%E5%81%9A%E7%9A%84%EF%BC%9F%E5%BA%93%E8%A1%A8%E6%80%8E%E4%B9%88%E8%AE%BE%E8%AE%A1%E7%9A%84%EF%BC%9F"><span class="toc-number">46.</span> <span class="toc-text">项目中你提到了可以支持不同场景的抽奖诉求，比如；多少积分后可以抽奖一个固定范围的奖品，或者抽奖n次后，才可以中奖某个奖品。这部分你是怎么做的？库表怎么设计的？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#18-%E6%8A%BD%E5%A5%96%E5%A5%96%E5%93%81%E5%BA%93%E5%AD%98%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%EF%BC%8C%E6%80%8E%E4%B9%88%E4%BF%9D%E8%AF%81%E6%9C%80%E7%BB%88%E4%B8%80%E8%87%B4%E6%80%A7%EF%BC%9F"><span class="toc-number">47.</span> <span class="toc-text">18. 抽奖奖品库存如何处理，怎么保证最终一致性？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%94%9F%E4%BA%A7%E8%80%85%E5%8F%AF%E8%83%BD%E5%A4%9A%E6%AC%A1%E5%8F%91%E9%80%81%E5%90%8C%E4%B8%80%E4%B8%AAMQ%EF%BC%8C%E6%80%8E%E4%B9%88%E4%BF%9D%E8%AF%81%E5%A5%96%E5%93%81%E4%B8%8D%E4%BC%9A%E8%B6%85%E5%8F%91%EF%BC%9F"><span class="toc-number">48.</span> <span class="toc-text">. 生产者可能多次发送同一个MQ，怎么保证奖品不会超发？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8A%BD%E5%A5%96%E7%AE%97%E6%B3%95%E5%A6%82%E4%BD%95%E6%8F%90%E4%BE%9BO-1-%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%EF%BC%8C%E6%8F%90%E9%AB%98%E6%8A%BD%E5%A5%96%E6%95%88%E7%8E%87%EF%BC%9F"><span class="toc-number">48.0.1.</span> <span class="toc-text">抽奖算法如何提供O(1)时间复杂度，提高抽奖效率？</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9C%A8%E9%A1%B9%E7%9B%AE%E4%B8%AD%E4%BD%BF%E7%94%A8rabbitmq-%E6%B6%88%E8%B4%B9%E8%80%85%E5%9C%A8%E6%8B%BF%E5%88%B0%E6%B6%88%E6%81%AF%E7%9A%84%E5%90%8C%E6%97%B6-%E7%B3%BB%E7%BB%9F%E5%AE%95%E6%9C%BA%E4%BA%86%EF%BC%8C%E6%80%8E%E4%B9%88%E5%8A%9E"><span class="toc-number">49.</span> <span class="toc-text">在项目中使用rabbitmq 消费者在拿到消息的同时 系统宕机了，怎么办</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%87%AA%E7%A0%94%E8%B7%AF%E7%94%B1%E7%BB%84%E4%BB%B6"><span class="toc-number">50.</span> <span class="toc-text">为什么自研路由组件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-%E7%A7%92%E6%9D%80%E7%9A%84%E6%BB%91%E5%9D%97%E9%94%81%E8%AE%B2%E8%A7%A3"><span class="toc-number">51.</span> <span class="toc-text">4. 秒杀的滑块锁讲解</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/ChestnutDuck/StudyRepository.github.io.git/posts/0.html" title="无题">无题</a><time datetime="2025-02-10T12:45:48.794Z" title="发表于 2025-02-10 20:45:48">2025-02-10</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/ChestnutDuck/StudyRepository.github.io.git/posts/0.html" title="无题">无题</a><time datetime="2025-02-08T09:06:29.682Z" title="发表于 2025-02-08 17:06:29">2025-02-08</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/ChestnutDuck/StudyRepository.github.io.git/posts/0.html" title="无题">无题</a><time datetime="2024-11-22T13:27:41.618Z" title="发表于 2024-11-22 21:27:41">2024-11-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/ChestnutDuck/StudyRepository.github.io.git/posts/0.html" title="无题">无题</a><time datetime="2024-11-18T13:47:17.579Z" title="发表于 2024-11-18 21:47:17">2024-11-18</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/ChestnutDuck/StudyRepository.github.io.git/posts/0.html" title="无题">无题</a><time datetime="2024-11-07T00:08:42.962Z" title="发表于 2024-11-07 08:08:42">2024-11-07</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><p id="ghbdages"><a class="github-badge" target="_blank" href="https://hexo.io/" style="margin-inline:5px" data-title="博客框架为Hexo_v5.4.0" title="博客框架为Hexo_v5.4.0"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@2.1.5/img/badge/Frame-Hexo.svg" alt="博客框架为Hexo_v5.4.0"/></a><a class="github-badge" target="_blank" href="https://blog.anheyu.com/" style="margin-inline:5px" data-title="本站使用AnZhiYu主题" title="本站使用AnZhiYu主题"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.9/img/Theme-AnZhiYu-2E67D3.svg" alt="本站使用AnZhiYu主题"/></a><a class="github-badge" target="_blank" href="https://www.dogecloud.com/" style="margin-inline:5px" data-title="本站使用多吉云为静态资源提供CDN加速" title="本站使用多吉云为静态资源提供CDN加速"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@2.2.0/img/badge/CDN-多吉云-3693F3.svg" alt="本站使用多吉云为静态资源提供CDN加速"/></a><a class="github-badge" target="_blank" href="https://github.com/" style="margin-inline:5px" data-title="本站项目由Github托管" title="本站项目由Github托管"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@2.1.5/img/badge/Source-Github.svg" alt="本站项目由Github托管"/></a><a class="github-badge" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" style="margin-inline:5px" data-title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可" title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@2.2.0/img/badge/Copyright-BY-NC-SA.svg" alt="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"/></a></p></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">&copy;2023 - 2026 By <a class="footer-bar-link" href="/ChestnutDuck/StudyRepository.github.io.git/" title="Duckkkkk" target="_blank">Duckkkkk</a></div></div><div id="footer-type-tips"></div><div class="js-pjax"><script>function subtitleType () {
+  fetch('https://v1.hitokoto.cn')
+    .then(response => response.json())
+    .then(data => {
+      if (true) {
+        const from = '出自 ' + data.from
+        const sub = []
+        sub.unshift(data.hitokoto, from)
+        window.typed = new Typed('#footer-type-tips', {
+          strings: sub,
+          startDelay: 300,
+          typeSpeed: 150,
+          loop: true,
+          backSpeed: 50,
+        })
+      } else {
+        document.getElementById('footer-type-tips').innerHTML = data.hitokoto
+      }
+    })
+}
+
+if (true) {
+  if (typeof Typed === 'function') {
+    subtitleType()
+  } else {
+    getScript('https://cdn.cbd.int/typed.js@2.0.15/dist/typed.umd.js').then(subtitleType)
+  }
+} else {
+  subtitleType()
+}
+</script></div></div><div class="footer-bar-right"><a class="footer-bar-link" href="https://github.com/anzhiyu-c/hexo-theme-anzhiyu" title="主题">主题</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/ChestnutDuck/StudyRepository.github.io.git/archives/" title="archive"><div class="headline">文章</div><div class="length-num">19</div></a><a href="/ChestnutDuck/StudyRepository.github.io.git/tags/" title="tag"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/ChestnutDuck/StudyRepository.github.io.git/categories/" title="category"><div class="headline">分类</div><div class="length-num">16</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://chestnutduck.github.io/" title="Duckkkkk·博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/siteicon/64.png" alt="Duckkkkk·博客"/><span class="back-menu-item-text">Duckkkkk·博客</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" href="https://github.com/ChestnutDuck/StudyRepository" title="项目仓库"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/siteicon/github.png" alt="项目仓库"/><span class="back-menu-item-text">项目仓库</span></a></div></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/ChestnutDuck/StudyRepository.github.io.git/tags/Java/" style="font-size: 0.88rem;">Java<sup>8</sup></a><a href="/ChestnutDuck/StudyRepository.github.io.git/tags/MybatisPlus/" style="font-size: 0.88rem;">MybatisPlus<sup>1</sup></a><a href="/ChestnutDuck/StudyRepository.github.io.git/tags/Spring/" style="font-size: 0.88rem;">Spring<sup>2</sup></a><a href="/ChestnutDuck/StudyRepository.github.io.git/tags/SpringBoot/" style="font-size: 0.88rem;">SpringBoot<sup>4</sup></a><a href="/ChestnutDuck/StudyRepository.github.io.git/tags/SpringCloud/" style="font-size: 0.88rem;">SpringCloud<sup>1</sup></a><a href="/ChestnutDuck/StudyRepository.github.io.git/tags/SpringMvc/" style="font-size: 0.88rem;">SpringMvc<sup>1</sup></a><a href="/ChestnutDuck/StudyRepository.github.io.git/tags/docker/" style="font-size: 0.88rem;">docker<sup>1</sup></a><a href="/ChestnutDuck/StudyRepository.github.io.git/tags/redis/" style="font-size: 0.88rem;">redis<sup>1</sup></a><a href="/ChestnutDuck/StudyRepository.github.io.git/tags/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/" style="font-size: 0.88rem;">后端开发<sup>8</sup></a><a href="/ChestnutDuck/StudyRepository.github.io.git/tags/%E5%BC%80%E5%8F%91%E6%89%8B%E5%86%8C/" style="font-size: 0.88rem;">开发手册<sup>1</sup></a><a href="/ChestnutDuck/StudyRepository.github.io.git/tags/%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95/" style="font-size: 0.88rem;">接口测试<sup>1</sup></a><a href="/ChestnutDuck/StudyRepository.github.io.git/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 0.88rem;">数据库<sup>1</sup></a><a href="/ChestnutDuck/StudyRepository.github.io.git/tags/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/" style="font-size: 0.88rem;">消息队列<sup>1</sup></a><a href="/ChestnutDuck/StudyRepository.github.io.git/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" style="font-size: 0.88rem;">源码分析<sup>2</sup></a><a href="/ChestnutDuck/StudyRepository.github.io.git/tags/%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/" style="font-size: 0.88rem;">负载均衡<sup>1</sup></a></div></div><hr/></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="anzhiyufont anzhiyu-icon-xmark"></i></button></nav><div class="is-center" id="loading-database"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-pulse-icon"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8802438608&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/ChestnutDuck/StudyRepository.github.io.git/js/utils.js"></script><script src="/ChestnutDuck/StudyRepository.github.io.git/js/main.js"></script><script src="/ChestnutDuck/StudyRepository.github.io.git/js/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.20/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload@17.8.4/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.cbd.int/pangu@4.0.7/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script async src="/anzhiyu/random.js"></script><script src="/ChestnutDuck/StudyRepository.github.io.git/js/search/local-search.js"></script><div class="js-pjax"><input type="hidden" name="page-type" id="page-type" value="post"></div><script async data-pjax src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.1/bubble/bubble.js"></script><script>var visitorMail = "visitor@anheyu.com";
+</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/dist/fireworks.min.js"></script><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/dist/canvas-fluttering-ribbon.min.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://cdn.cbd.int/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/ChestnutDuck/StudyRepository.github.io.git/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div><script async>window.onload=function(){var a=document.createElement('script'),b=document.getElementsByTagName('script')[0];a.type='text/javascript',a.async=!0,a.src='/sw-register.js?v='+Date.now(),b.parentNode.insertBefore(a,b)};</script></body></html>
