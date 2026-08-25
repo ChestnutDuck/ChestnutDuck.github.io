@@ -6,17 +6,25 @@
   width: 100%;
   margin: 30px 0;
   padding: 20px;
+
   background: var(--card-bg);
   border: 1px solid var(--card-border);
   border-radius: 12px;
+
   overflow: visible;
   box-sizing: border-box;
 }
+
+
+/* ==========================
+   标题
+   ========================== */
 
 .github-calendar-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
+
   margin-bottom: 18px;
 }
 
@@ -26,12 +34,19 @@
   color: var(--font-color);
 }
 
+
+/* ==========================
+   GitHub Calendar
+   ========================== */
+
 .github-calendar {
   width: 100%;
   padding: 5px 0 10px;
+
   overflow: visible;
   box-sizing: border-box;
 }
+
 
 /* ==========================
    贡献统计
@@ -40,21 +55,27 @@
 .github-calendar-summary {
   display: flex;
   align-items: baseline;
+
   gap: 6px;
+
   margin-bottom: 14px;
+
   line-height: 1.5;
 }
 
 .github-calendar-total {
   font-size: 16px;
   font-weight: 600;
+
   color: var(--font-color);
 }
 
 .github-calendar-period {
   font-size: 13px;
+
   color: var(--anzhiyu-secondtext);
 }
+
 
 /* ==========================
    热力图主体
@@ -67,9 +88,12 @@
 
 .github-calendar-body {
   display: flex;
+
   width: 100%;
+
   box-sizing: border-box;
 }
+
 
 /* ==========================
    星期
@@ -80,19 +104,27 @@
   flex: 0 0 32px;
 
   display: grid;
-  grid-template-rows: repeat(7, 11px);
+
+  grid-template-rows:
+    repeat(7, 11px);
+
   row-gap: 3px;
 
   padding-top: 23px;
+
   box-sizing: border-box;
 }
 
 .github-calendar-weekdays span {
   font-size: 10px;
+
   line-height: 11px;
+
   color: var(--anzhiyu-secondtext);
+
   white-space: nowrap;
 }
+
 
 /* ==========================
    图表区域
@@ -100,9 +132,12 @@
 
 .github-calendar-chart {
   flex: 1;
+
   min-width: 0;
+
   overflow: visible;
 }
+
 
 /* ==========================
    月份
@@ -122,12 +157,14 @@
   min-width: 0;
 
   font-size: 10px;
+
   line-height: 18px;
 
   color: var(--anzhiyu-secondtext);
 
   white-space: nowrap;
 }
+
 
 /* ==========================
    热力图网格
@@ -137,10 +174,12 @@
   width: 100%;
 
   display: flex;
+
   gap: 3px;
 
   box-sizing: border-box;
 }
+
 
 /* ==========================
    每周
@@ -148,6 +187,7 @@
 
 .github-calendar-week {
   flex: 1 1 0;
+
   min-width: 0;
 
   display: grid;
@@ -160,8 +200,9 @@
   box-sizing: border-box;
 }
 
+
 /* ==========================
-   方块
+   热力图小方块
    ========================== */
 
 .github-calendar-cell {
@@ -176,16 +217,34 @@
 
   cursor: pointer;
 
+  position: relative;
+
   transition:
     transform 0.12s ease,
-    filter 0.12s ease;
+    filter 0.12s ease,
+    box-shadow 0.12s ease;
 }
 
+
 /* ==========================
-   GitHub 绿色
+   悬停动画
    ========================== */
+
+.github-calendar-cell:hover {
+  transform: scale(1.35);
+
+  filter: brightness(0.92);
+
+  z-index: 100;
+
+  box-shadow:
+    0 0 0 1px
+    rgba(255, 255, 255, 0.35);
+}
+
+
 /* ==========================
-   暗紫色 Contribution
+   浅色模式 - 暗紫色
    ========================== */
 
 .github-calendar-cell[data-level="0"] {
@@ -208,17 +267,6 @@
   background: #4c1d95;
 }
 
-/* ==========================
-   悬停
-   ========================== */
-
-.github-calendar-cell:hover {
-  transform: scale(1.35);
-  filter: brightness(0.92);
-
-  position: relative;
-  z-index: 10;
-}
 
 /* ==========================
    Tooltip
@@ -232,6 +280,7 @@
   display: flex;
 
   flex-direction: column;
+
   align-items: center;
 
   gap: 3px;
@@ -253,18 +302,61 @@
   pointer-events: none;
 
   box-shadow:
-    0 4px 12px rgba(0, 0, 0, 0.2);
+    0 4px 12px
+    rgba(0, 0, 0, 0.2);
+
+  opacity: 0;
+
+  transform:
+    translateY(4px)
+    scale(0.96);
+
+  animation:
+    githubTooltipIn
+    0.12s
+    ease-out
+    forwards;
 }
+
 
 .github-calendar-tooltip strong {
   font-size: 12px;
+
   font-weight: 600;
 }
 
+
 .github-calendar-tooltip span {
   font-size: 10px;
+
   opacity: 0.8;
 }
+
+
+/* ==========================
+   Tooltip 动画
+   ========================== */
+
+@keyframes githubTooltipIn {
+
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(4px)
+      scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0)
+      scale(1);
+  }
+
+}
+
 
 /* ==========================
    图例
@@ -272,7 +364,9 @@
 
 .github-calendar-legend {
   display: flex;
+
   align-items: center;
+
   justify-content: flex-end;
 
   gap: 4px;
@@ -284,6 +378,7 @@
   color: var(--anzhiyu-secondtext);
 }
 
+
 .github-calendar-legend i {
   width: 10px;
   height: 10px;
@@ -293,8 +388,9 @@
   border-radius: 2px;
 }
 
+
 .github-calendar-legend i[data-level="0"] {
-  background: #ebedf0;
+  background: #eeeef2;
 }
 
 .github-calendar-legend i[data-level="1"] {
@@ -313,53 +409,66 @@
   background: #4c1d95;
 }
 
+
 /* ==========================
    Anzhiyu 暗色模式
    ========================== */
 
-/* ==========================
-   暗色模式 - 暗紫色
-   ========================== */
-
-[data-theme="dark"] .github-calendar-cell[data-level="0"] {
+[data-theme="dark"]
+.github-calendar-cell[data-level="0"] {
   background: #17141f;
 }
 
-[data-theme="dark"] .github-calendar-cell[data-level="1"] {
+[data-theme="dark"]
+.github-calendar-cell[data-level="1"] {
   background: #33245c;
 }
 
-[data-theme="dark"] .github-calendar-cell[data-level="2"] {
+[data-theme="dark"]
+.github-calendar-cell[data-level="2"] {
   background: #54358f;
 }
 
-[data-theme="dark"] .github-calendar-cell[data-level="3"] {
+[data-theme="dark"]
+.github-calendar-cell[data-level="3"] {
   background: #7546c9;
 }
 
-[data-theme="dark"] .github-calendar-cell[data-level="4"] {
+[data-theme="dark"]
+.github-calendar-cell[data-level="4"] {
   background: #9b6cff;
 }
 
-[data-theme="dark"] .github-calendar-legend i[data-level="0"] {
+
+/* ==========================
+   暗色模式图例
+   ========================== */
+
+[data-theme="dark"]
+.github-calendar-legend i[data-level="0"] {
   background: #161b22;
 }
 
-[data-theme="dark"] .github-calendar-legend i[data-level="1"] {
+[data-theme="dark"]
+.github-calendar-legend i[data-level="1"] {
   background: #33245c;
 }
 
-[data-theme="dark"] .github-calendar-legend i[data-level="2"] {
+[data-theme="dark"]
+.github-calendar-legend i[data-level="2"] {
   background: #54358f;
 }
 
-[data-theme="dark"] .github-calendar-legend i[data-level="3"] {
+[data-theme="dark"]
+.github-calendar-legend i[data-level="3"] {
   background: #7546c9;
 }
 
-[data-theme="dark"] .github-calendar-legend i[data-level="4"] {
+[data-theme="dark"]
+.github-calendar-legend i[data-level="4"] {
   background: #9b6cff;
 }
+
 
 /* ==========================
    移动端
@@ -371,16 +480,20 @@
     padding: 15px;
   }
 
+
   .github-calendar-total {
     font-size: 14px;
   }
+
 
   .github-calendar-period {
     font-size: 12px;
   }
 
+
   .github-calendar-weekdays {
     width: 27px;
+
     flex-basis: 27px;
 
     grid-template-rows:
@@ -391,23 +504,30 @@
     padding-top: 21px;
   }
 
+
   .github-calendar-weekdays span {
     font-size: 9px;
+
     line-height: 9px;
   }
+
 
   .github-calendar-months {
     height: 21px;
   }
 
+
   .github-calendar-months span {
     font-size: 9px;
+
     line-height: 17px;
   }
+
 
   .github-calendar-grid {
     gap: 2px;
   }
+
 
   .github-calendar-week {
     grid-template-rows:
@@ -416,18 +536,46 @@
     row-gap: 2px;
   }
 
+
   .github-calendar-cell {
     height: 9px;
+
     border-radius: 2px;
   }
 
+
+  .github-calendar-cell:hover {
+    transform: scale(1.35);
+  }
+
+
   .github-calendar-legend {
     margin-top: 7px;
+
     font-size: 9px;
   }
+
 
   .github-calendar-legend i {
     width: 9px;
     height: 9px;
   }
+
+
+  .github-calendar-tooltip {
+    padding: 6px 9px;
+
+    font-size: 11px;
+  }
+
+
+  .github-calendar-tooltip strong {
+    font-size: 11px;
+  }
+
+
+  .github-calendar-tooltip span {
+    font-size: 9px;
+  }
+
 }
