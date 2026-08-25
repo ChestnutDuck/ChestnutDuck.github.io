@@ -184,25 +184,28 @@
 /* ==========================
    GitHub 绿色
    ========================== */
+/* ==========================
+   暗紫色 Contribution
+   ========================== */
 
 .github-calendar-cell[data-level="0"] {
-  background: #ebedf0;
+  background: #eeeef2;
 }
 
 .github-calendar-cell[data-level="1"] {
-  background: #9be9a8;
+  background: #c4b5fd;
 }
 
 .github-calendar-cell[data-level="2"] {
-  background: #40c463;
+  background: #8b5cf6;
 }
 
 .github-calendar-cell[data-level="3"] {
-  background: #30a14e;
+  background: #6d28d9;
 }
 
 .github-calendar-cell[data-level="4"] {
-  background: #216e39;
+  background: #4c1d95;
 }
 
 /* ==========================
@@ -295,43 +298,47 @@
 }
 
 .github-calendar-legend i[data-level="1"] {
-  background: #9be9a8;
+  background: #c4b5fd;
 }
 
 .github-calendar-legend i[data-level="2"] {
-  background: #40c463;
+  background: #8b5cf6;
 }
 
 .github-calendar-legend i[data-level="3"] {
-  background: #30a14e;
+  background: #6d28d9;
 }
 
 .github-calendar-legend i[data-level="4"] {
-  background: #216e39;
+  background: #4c1d95;
 }
 
 /* ==========================
    Anzhiyu 暗色模式
    ========================== */
 
+/* ==========================
+   暗色模式 - 暗紫色
+   ========================== */
+
 [data-theme="dark"] .github-calendar-cell[data-level="0"] {
-  background: #161b22;
+  background: #17141f;
 }
 
 [data-theme="dark"] .github-calendar-cell[data-level="1"] {
-  background: #0e4429;
+  background: #33245c;
 }
 
 [data-theme="dark"] .github-calendar-cell[data-level="2"] {
-  background: #006d32;
+  background: #54358f;
 }
 
 [data-theme="dark"] .github-calendar-cell[data-level="3"] {
-  background: #26a641;
+  background: #7546c9;
 }
 
 [data-theme="dark"] .github-calendar-cell[data-level="4"] {
-  background: #39d353;
+  background: #9b6cff;
 }
 
 [data-theme="dark"] .github-calendar-legend i[data-level="0"] {
@@ -339,19 +346,19 @@
 }
 
 [data-theme="dark"] .github-calendar-legend i[data-level="1"] {
-  background: #0e4429;
+  background: #33245c;
 }
 
 [data-theme="dark"] .github-calendar-legend i[data-level="2"] {
-  background: #006d32;
+  background: #54358f;
 }
 
 [data-theme="dark"] .github-calendar-legend i[data-level="3"] {
-  background: #26a641;
+  background: #7546c9;
 }
 
 [data-theme="dark"] .github-calendar-legend i[data-level="4"] {
-  background: #39d353;
+  background: #9b6cff;
 }
 
 /* ==========================
